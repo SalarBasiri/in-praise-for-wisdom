@@ -1,21 +1,21 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa" dir="rtl" id="main-html">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> در ستایش خرد ، In Praise for Wisdom </title>
+    <title>در ستایش خرد | In Praise for Wisdom</title>
     <style>
-        /* استایل‌های پایه و فونت */
         :root {
             --primary-color: #2c3e50;
             --text-color: #333;
             --bg-color: #f9f9f9;
             --card-bg: #ffffff;
             --accent-color: #e67e22;
+            --lang-bar-bg: rgba(44, 62, 80, 0.95);
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Tahoma, "Vazirmatn", Geneva, Verdana, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
             line-height: 1.8;
@@ -23,14 +23,40 @@
             padding: 0;
         }
 
-        /* کانتینر اصلی */
+        /* Floating Language Bar */
+        .lang-nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: var(--lang-bar-bg);
+            padding: 10px 0;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .lang-btn {
+            background: white;
+            border: none;
+            padding: 8px 20px;
+            margin: 0 5px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            font-family: inherit;
+            transition: 0.3s;
+        }
+
+        .lang-btn.active {
+            background: var(--accent-color);
+            color: white;
+        }
+
         .container {
             max-width: 800px;
             margin: 0 auto;
             padding: 40px 20px;
         }
 
-        /* هدر مقاله */
         header {
             text-align: center;
             margin-bottom: 60px;
@@ -38,18 +64,9 @@
             padding-bottom: 30px;
         }
 
-        h1 {
-            color: var(--primary-color);
-            font-size: 2.2rem;
-            margin-bottom: 10px;
-        }
+        h1 { color: var(--primary-color); font-size: 2.2rem; margin-bottom: 10px; }
+        .meta { color: #777; font-size: 0.9rem; }
 
-        .meta {
-            color: #777;
-            font-size: 0.9rem;
-        }
-
-        /* بخش‌های مقاله */
         section {
             background: var(--card-bg);
             padding: 30px;
@@ -59,45 +76,32 @@
             transition: transform 0.3s ease;
         }
 
-        section:hover {
-            transform: translateY(-5px);
-        }
+        section:hover { transform: translateY(-5px); }
 
         h2 {
             color: var(--accent-color);
             border-right: 5px solid var(--accent-color);
             padding-right: 15px;
-            margin-top: 0;
             font-size: 1.6rem;
+            margin-top: 0;
         }
 
-        p {
-            font-size: 1.1rem;
-            text-align: justify;
+        /* Directional Adjustments */
+        [dir="ltr"] h2 {
+            border-right: none;
+            border-left: 5px solid var(--accent-color);
+            padding-right: 0;
+            padding-left: 15px;
+            text-align: left;
         }
+        [dir="ltr"] p { text-align: left; }
 
-        /* استایل تصاویر */
-        .image-wrapper {
-            margin: 25px 0;
-            text-align: center;
-        }
+        p { font-size: 1.1rem; text-align: justify; }
 
-        .image-wrapper img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-        }
+        .image-wrapper { margin: 25px 0; text-align: center; }
+        .image-wrapper img { max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+        .image-caption { display: block; font-size: 0.85rem; color: #888; margin-top: 10px; font-style: italic; }
 
-        .image-caption {
-            display: block;
-            font-size: 0.85rem;
-            color: #888;
-            margin-top: 10px;
-            font-style: italic;
-        }
-
-        /* نقل قول‌ها (برای آیات یا جملات خاص) */
         blockquote {
             background: #fff3e0;
             border-right: 10px solid #ffb74d;
@@ -106,367 +110,437 @@
             font-style: italic;
             border-radius: 0 8px 8px 0;
         }
+        [dir="ltr"] blockquote {
+            border-right: none;
+            border-left: 10px solid #ffb74d;
+            border-radius: 8px 0 0 8px;
+        }
 
-        /* فوتر */
+        .download-btn-container { text-align: center; margin: 20px 0 40px 0; }
+        .pdf-download-btn {
+            display: inline-flex;
+            align-items: center;
+            background-color: #2980b9;
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(41, 128, 185, 0.3);
+        }
+
+        /* Language visibility toggle */
+        .content-en { display: none; }
+        html[lang="en"] .content-en { display: block; }
+        html[lang="en"] .content-fa { display: none; }
+
         footer {
             text-align: center;
             margin-top: 50px;
-            padding: 30px;
-            color: #888;
-            border-top: 1px solid #eee;
+            padding: 40px;
+            background-color: #f4f7f9;
+            border-top: 1px solid #d1d9e0;
+            font-size: 0.9rem;
         }
-
-        /* واکنش‌گرایی برای موبایل */
-        @media (max-width: 600px) {
-            h1 { font-size: 1.8rem; }
-            section { padding: 20px; }
-            .container { padding: 20px 15px; }
-        }
-		
-		/* استایل اسلایدر */
-		.slider-container {
-			position: relative;
-			max-width: 100%;
-			margin: 20px auto;
-			overflow: hidden;
-			border-radius: 12px;
-			box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-		}
-
-		.slides {
-			display: none; /* در ابتدا همه مخفی هستند */
-		}
-
-		.slides img {
-			width: 100%;
-			height: auto;
-			display: block;
-		}
-
-		/* دکمه‌های ناوبری */
-		.prev, .next {
-			cursor: pointer;
-			position: absolute;
-			top: 50%;
-			width: auto;
-			padding: 16px;
-			margin-top: -22px;
-			color: white;
-			font-weight: bold;
-			font-size: 20px;
-			transition: 0.6s ease;
-			border-radius: 0 3px 3px 0;
-			user-select: none;
-			background-color: rgba(0,0,0,0.3);
-			text-decoration: none;
-		}
-
-		.next {
-			left: 0;
-			border-radius: 3px 0 0 3px;
-		}
-
-		.prev {
-			right: 0;
-			border-radius: 0 3px 3px 0;
-		}
-
-		.prev:hover, .next:hover {
-			background-color: rgba(0,0,0,0.8);
-		}
-
-		/* انیمیشن محو شدن */
-		.fade {
-			animation-name: fade;
-			animation-duration: 1.5s;
-		}
-
-		@keyframes fade {
-			from {opacity: .4} 
-			to {opacity: 1}
-		}
-		
-		
-		.download-btn-container {
-			text-align: center;
-			margin: 20px 0 40px 0;
-		}
-
-		.pdf-download-btn {
-			display: inline-flex;
-			align-items: center;
-			background-color: #2980b9; /* رنگ آبی خرد */
-			color: white;
-			padding: 12px 25px;
-			text-decoration: none;
-			border-radius: 50px;
-			font-weight: bold;
-			transition: all 0.3s ease;
-			box-shadow: 0 4px 10px rgba(41, 128, 185, 0.3);
-		}
-
-		.pdf-download-btn:hover {
-			background-color: #1a5276; /* آبی تیره تر برای حالت هاور */
-			transform: translateY(-2px);
-			box-shadow: 0 6px 15px rgba(41, 128, 185, 0.4);
-		}
-
-		.pdf-download-btn svg {
-			margin-left: 10px;
-			fill: white;
-		}
-		
     </style>
-	
-		<meta name="description" content="بررسی جایگاه خرد گرایی، اندیشه آزاد و تقابل عقلانیت مدرن با موهومات فقهی در مسیر رسیدن به عدالت و حقیقت.">
-		<meta name="keywords" content="خرد گرایی، ستایش خرد، اندیشه آزاد، آزادی، عقلانیت مدرن، نقد فقه، معرفت شناسی، قطب نمای عقل، خرد فردی">
-		<meta name="author" content="سالار بصیری">
-
-		<meta property="og:title" content="در ستایش خرد؛ بازگشت به یگانه منبع اصیل معرفت">
-		<meta property="og:description" content="تحلیلی بر ضرورت حاکمیت خرد فردی و رهایی از زنجیر موهومات برای دستیابی به عدالت واقعی.">
-		<meta property="og:type" content="article">
-		<meta property="og:image" content="img/fig10.jpg">
-
 </head>
 <body>
 
+<nav class="lang-nav">
+    <button id="btn-fa" class="lang-btn active" onclick="setLanguage('fa')">فارسی</button>
+    <button id="btn-en" class="lang-btn" onclick="setLanguage('en')">English</button>
+</nav>
+
 <div class="container">
     <header>
-        <h1>در ستایش خرد</h1>
-        <div class="meta">سالار بصیری</div>
-		<div class="meta"> 12 دی 1404 ، تهران، ایران</div>
+        <div class="content-fa">
+            <h1>در ستایش خرد</h1>
+            <div class="meta">سالار بصیری</div>
+            <div class="meta">۱۲ دی ۱۴۰۴، تهران، ایران</div>
+        </div>
+        <div class="content-en">
+            <h1>In Praise for Wisdom</h1>
+            <div class="meta">Salar Basiri</div>
+            <div class="meta">January 1, 2026, Tehran, Iran</div>
+        </div>
     </header>
-	
-	<div class="download-btn-container">
-    <a href="img/InPraiseForWisdom.pdf" class="pdf-download-btn" download>
-        <span>دانلود نسخه PDF مقاله</span>
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
-            <path d="M11.363 2c4.155 0 2.637 6 2.637 6s6-1.45 6 2.457v11.543h-16v-20h7.363zm.826-2h-10.189v24h20v-14.366l-9.811-9.634zm4.811 13h-10v-1h10v1zm0 2h-10v-1h10v1zm0 2h-10v-1h10v1z"/>
-        </svg>
-    </a>
-	</div>
+
+    <div class="download-btn-container">
+        <a href="img/InPraiseForWisdom.pdf" class="pdf-download-btn" download>
+            <span class="content-fa">دانلود نسخه PDF مقاله</span>
+            <span class="content-en">Download PDF Version</span>
+            <svg style="margin: 0 10px;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white">
+                <path d="M11.363 2c4.155 0 2.637 6 2.637 6s6-1.45 6 2.457v11.543h-16v-20h7.363zm.826-2h-10.189v24h20v-14.366l-9.811-9.634zm4.811 13h-10v-1h10v1zm0 2h-10v-1h10v1zm0 2h-10v-1h10v1z"/>
+            </svg>
+        </a>
+    </div>
+
     <section id="intro">
-        <h2>مقدمه</h2>
-        <p>طی میلیون‌ها سال گسترش حیات در کره زمین، خلقت «انسان خردمند» را باید نقطه اوج این داستان دانست؛ آنجا که آگاهی و قدرت تفکر از دامنه ماده و انرژی فراروی می‌کند. انسان با تکیه بر قوانین طبیعت، قادر به تصور، ابزارسازی و نوآوری شد و بدین‌گونه جلوه‌ای از قدرت خلاقیت را به نمایش گذاشت.</p>
-        <p>این همه بدون «خرد» غیرقابل تصور است. در این میان، نقش «زبان» انکارناپذیر است؛ کلام نه تنها بستری برای ارتباط، که ابزاری برای اشتراک‌گذاری تجربیات است. بدون زبان، آگاهی فردی بشر در طول زمان به «فراآگاهی» جمعی بدل نمی‌شد؛ نه تمدنی شکل می‌گرفت و نه تغییری در مسیر زندگی انسان پدید می‌آمد. </p>
-		<p> در روایت‌های آفرینش آمده است که چون خدا انسان را آفرید، شیطان از سجده سر باز زد، چرا که خود را از آتش و انسان را از خاک می‌پنداشت. اما او در بررسی این موجود، به رازی پی برد: مهم‌ترین ویژگی انسان، همانا «خرد» و توانایی تفکر اوست. سوگند شیطان برای انحراف بشر، از همین‌جا آغاز شد؛ او دانست که تنها با «از میان برداشتن خرد» می‌تواند انسان را از مسیر اصیل خود منحرف کند.</p>
-		<p>با تکیه بر همین پیوند ناگسستنی میان تفکر و زبان، هدف این نوشتار بهره‌گیری از ابزار کلام و گفتگو برای بازیافتن و گستراندن «خرد ناب» است. این مقدمه‌ای است بر سلسله مقالاتی با عنوان «در ستایش خرد»؛ مجموعه‌ای که در آن تلاش خواهم کرد با تکیه بر متن قرآن و روش‌های مستدل علمی، به بازخوانی تفاوت بنیادین انسان با دیگر موجودات بپردازم. در این مسیر، به بررسی مغالطه‌های کهن و چالش‌های ذهنی معاصری خواهیم رفت که بر سر راه خرد قرار گرفته‌اند؛ چرا که باور دارم کلید حل گره‌های امروز ما، در بازگشت به اندیشیدن آزاد و دور از جزم‌اندیشی نهفته است. </p>
-		<div class="image-wrapper">
-            <img src="img/fig1.jpg" alt="تاکید بر تفکر و تعقل">
-            <span class="image-caption">تاکید بر تفکر و تعقل</span>
-        </div>
+        <div class="content-fa">
+            <h2>مقدمه</h2>
+			<p>طی میلیون‌ها سال گسترش حیات در کره زمین، خلقت «انسان خردمند» را باید نقطه اوج این داستان دانست؛ آنجا که آگاهی و قدرت تفکر از دامنه ماده و انرژی فراروی می‌کند. انسان با تکیه بر قوانین طبیعت، قادر به تصور، ابزارسازی و نوآوری شد و بدین‌گونه جلوه‌ای از قدرت خلاقیت را به نمایش گذاشت.</p>
+			<p>این همه بدون «خرد» غیرقابل تصور است. در این میان، نقش «زبان» انکارناپذیر است؛ کلام نه تنها بستری برای ارتباط، که ابزاری برای اشتراک‌گذاری تجربیات است. بدون زبان، آگاهی فردی بشر در طول زمان به «فراآگاهی» جمعی بدل نمی‌شد؛ نه تمدنی شکل می‌گرفت و نه تغییری در مسیر زندگی انسان پدید می‌آمد. </p>
+			<p> در روایت‌های آفرینش آمده است که چون خدا انسان را آفرید، شیطان از سجده سر باز زد، چرا که خود را از آتش و انسان را از خاک می‌پنداشت. اما او در بررسی این موجود، به رازی پی برد: مهم‌ترین ویژگی انسان، همانا «خرد» و توانایی تفکر اوست. سوگند شیطان برای انحراف بشر، از همین‌جا آغاز شد؛ او دانست که تنها با «از میان برداشتن خرد» می‌تواند انسان را از مسیر اصیل خود منحرف کند.</p>
+			<p>با تکیه بر همین پیوند ناگسستنی میان تفکر و زبان، هدف این نوشتار بهره‌گیری از ابزار کلام و گفتگو برای بازیافتن و گستراندن «خرد ناب» است. این مقدمه‌ای است بر سلسله مقالاتی با عنوان «در ستایش خرد»؛ مجموعه‌ای که در آن تلاش خواهم کرد با تکیه بر متن قرآن و روش‌های مستدل علمی، به بازخوانی تفاوت بنیادین انسان با دیگر موجودات بپردازم. در این مسیر، به بررسی مغالطه‌های کهن و چالش‌های ذهنی معاصری خواهیم رفت که بر سر راه خرد قرار گرفته‌اند؛ چرا که باور دارم کلید حل گره‌های امروز ما، در بازگشت به اندیشیدن آزاد و دور از جزم‌اندیشی نهفته است. </p>
 		
+		</div>
+        <div class="content-en">
+            <h2>Introduction</h2>
+			<p>Over millions of years of life’s expansion on Earth, the emergence of "Homo sapiens" stands as the pinnacle of this narrative—the point where consciousness and the power of thought transcend the realms of matter and energy. By harnessing the laws of nature, humanity became capable of imagination, tool-making, and innovation, thereby manifesting a spark of creative power.</p>
 
-		
-    </section>
-	
-	    <section id="section1">
-        <h2>بخش اول:  قوانین طبیعت و اراده انسان؛ تنها فصل مشترک  </h2>
-        <p> یکی از بزرگترین مغالطه‌هایی که خرد بشر را به زنجیر می‌کشد، واگذاری تمام مسئولیت‌ها به نیروهای غیبی و نادیده گرفتن سهم «عمل» و «قانون» است. برای خروج از این بن‌بست فکری، باید بر روی یک اصل جهان‌شمول توافق کنیم که مبنای تمام گفتگوهای عقلانی است: جهان توسط «قوانین تغییرناپذیر طبیعت» و «اراده و اختیار آزاد انسان» اداره می‌شود.   </p>
-		<p> این یک اصل عینی است. پذیرش اختیار، سنگ‌بنای تمام نظام‌های حقوقی و اخلاقی جهان است. اگر اختیار نباشد، نه جرمی معنا دارد و نه جزا؛ هیچ قاتلی را نمی‌توان محکوم کرد و هیچ قهرمانی را نمی‌توان ستود. حتی زمانی که با تسلط یک زورگو روبرو هستیم، این دو اصل نقض نمی‌شوند؛ در آنجا نیز با سوءاستفاده از «اراده آزاد» یک انسان و بهره‌گیری از ابزارهای قدرت (مبتنی بر قوانین طبیعت) روبرو هستیم، نه یک تقدیرِ ناگزیر و آسمانی.   </p>
-		<p> تفاوت در نگاه‌ها، تنها در تفسیر منشأ این دو اصل است:  </p>
-		<p>  ۱. یکتاپرستان حقیقی معتقدند این قوانین و این قدرتِ اختیار، توسط خالقی یگانه طراحی و به انسان تفویض شده است.  </p>
-		<p>  ۲. ناباوران آن را برآمده از فرآیندهای مادی و تکاملی می‌دانند.   </p>
-		<p> ۳. موهوم‌پرستان اما، با نسبت دادن هر رویدادی به اراده‌های شخصی‌سازی شده و خارج از قانونمندی طبیعت، هم به ساحت خرد توهین می‌کنند و هم راه را بر مسئولیت‌پذیری انسان می‌بندند.   </p>
-		<p> خدا با این جزئیات کاری ندارد! این جمله، نفیِ آفریدگار نیست؛ بلکه تکریمِ قانونی است که وضع شده تا جهان بر پایه اختیار آزادِ تنفیذ شده به بشر خردمند بچرخد؛ آنجا که انسان با شناخت قوانین طبیعت، آن‌ها را برای زندگی بهتر به کار می‌گیرد و این عینِ «عدالت» است.   </p>
-		<p> در دنیای مبتنی بر دانش، پذیرش این دو اصل ما را از انتظار برای معجزه یا ترس از خرافه می‌رهاند. ما نه قربانیانِ بی‌اراده‌ی سرنوشت، بلکه ناظران و بازیگرانی خردمند هستیم که باید با شناخت قوانین هستی، سرنوشت خود را با اراده‌ای آزاد رقم بزنیم.   </p>
+			<p>All of this would be inconceivable without "Wisdom." Within this context, the role of "Language" is undeniable; speech is not merely a medium for communication, but a tool for the sharing of experiences. Without language, individual human consciousness would never have evolved into a collective "super-consciousness" over time; no civilization would have taken shape, and no meaningful shift in the trajectory of human life would have occurred.</p>
+
+			<p>In creation narratives, it is told that when God created man, Satan refused to prostrate, perceiving himself to be made of fire and man of clay. Yet, upon examining this creature, he uncovered a secret: man’s most defining characteristic is "Wisdom" and his capacity for thought. It was from this realization that Satan’s oath to mislead humanity began; he understood that only by "extinguishing wisdom" could he divert man from his authentic path.</p>
+
+			<p>Relying on this inseparable bond between thought and language, the objective of this writing is to employ the tools of discourse and dialogue to rediscover and propagate "Pure Wisdom." This serves as an introduction to a series of articles titled "In Praise for Wisdom"—a collection in which I will strive, by drawing upon the Quranic text and reasoned scientific methodologies, to re-examine the fundamental distinction between humans and other creatures. In this journey, we shall explore the ancient fallacies and contemporary intellectual challenges that obstruct the path of wisdom; for I believe the key to untying today’s knots lies in returning to free thinking, far removed from dogmatism.</p>
+		</div>
         <div class="image-wrapper">
-            <img src="img/fig2.jpg" alt="تاکید بر قوانین طبیعت و عقل و خرد انسان">
-            <span class="image-caption">تاکید بر قوانین طبیعت و عقل و خرد انسان</span>
+            <img src="img/fig1.jpg" alt="Emphasis on reasoning">
+            <span class="image-caption content-fa">تاکید بر تفکر و تعقل</span>
+            <span class="image-caption content-en">Emphasis on thinking and reasoning</span>
         </div>
-		
-
-		
     </section>
-	
-	
 
-	<section id="section2">
-        <h2>بخش دوم:  عبور از «شخص مقدس» به سوی «امر مقدس»</h2>
-        <p>بنیادی‌ترین رسالت خردورزی در مسیر توحید، فروپاشیدن بساط «شخصیت‌پرستی» و جایگزینی آن با حاکمیت «امر مقدس یا حقیقت»  است. بزرگترین مغالطه‌ای که تمدن‌ها را به بند می‌کشد، بازگشت به عصر بت‌پرستی در لباسی جدید است؛ جایی که یک «انسان» جایگزین «حقیقت» می‌شود.  </p>
-		<p><strong> انسان‌انگاری تا فرشته‌انگاری </strong></p>
-		<p>ذهن‌های خردگریز در درک مفاهیم مجرد ناتوانند و تمایل دارند حق و عدل را در قالب یک بت انسانی تجسم کنند (Anthropomorphism). جریان‌های تمامیت‌خواه با بهره‌گیری از این ضعف، نوعی «فرشته‌انگاری» از شخصیت‌ها ایجاد می‌کنند تا آن‌ها را به مقام «معصومیت مطلق» ارتقا دهند. هدف این مغلطه، غیرقابل نقد کردنِ شخص است. وقتی کسی معصوم فرض شد، نقد او «کفر» تلقی شده و راه بر خرد بسته می‌شود. </p>
-		
-	
-		<p><strong> خرد؛ رسول باطنی در برابر حبسِ عقل </strong></p>
-		<p>در دیدگاه خردگرایانه، از «عقل» به عنوان رسول باطنی یاد شده است؛ یعنی همان‌گونه که پیامبران رسولان ظاهری هستند، خرد نیز فرستاده‌ی خداوند در درون هر انسان است. بنابراین، تمرکزِ اصیل باید بر اختیار و اراده‌ی انسان عاقل و خردگرا باشد. حبس کردنِ عقل در اراده‌ی تنها یک نفر (با هر عنوانی اعم از ولی، خلیفه یا قیم) در حقیقت نفیِ این رسول باطنی و تعطیل کردنِ ودیعه‌ی الهی در وجود تک‌تک انسان‌هاست. </p>
-		
-		<p><strong>تقابل آزادیِ  با استبداد ؛ از نظم پادگانی تا اسارت دینی </strong></p>
-		<p>با کالبدشکافی مفاهیمی چون ولایت مطلق، خلافت و قیومیت بشری، به یک حقیقت عریان می‌رسیم: این‌ها در واقعیت چیزی جز یک «نظم پادگانی» نیستند که توسط ساختارهای نظامی و شبه‌نظامی ترویج می‌شوند. در یک پادگان، «اطاعت کورکورانه» بزرگترین فضیلت است، اما در نظام خردمحورِ حقیقت، «اختیار» و «آزادی» اساس خلقت انسان است. </p>
-		<p>  الگوی ماندگار فرعون: مالکیت بر جان و مال هر نوع حکومتی که اراده‌ی خود را بر مردم تحمیل کند، در حقیقت بازتولید الگوی «فرعون» است. فرعون نیز یک حکومت دینی بود؛ او تنها یک حاکم سیاسی نبود، بلکه با ادعای مقام قدسی، مردم را ترغیب به پرستش خود می‌کرد و جان، مال و حتی سرنوشت بنی‌اسرائیل را از آنِ خود می‌دانست. این دقیقاً همان ادعایی است که امروز تحت نام «ولایت فقیه» مطرح می‌شود: ادعای مالکیت بر مقدرات ملی تحت پوشش نیابت الهی.</p>
-		<p>خدعه‌ی کسب اتوریته از مقدسات: تاریخ نشان می‌دهد که این روش همیشگی حکومت‌های تمامیت‌خواه بوده است: استفاده از آنچه مورد قبول عامه است برای کسب اتوریته (اقتدار). در این میان، اصلاً مهم نیست که جامعه‌ای موهوم‌پرست باشد، بی‌پناه باشد یا حتی یکتاپرست؛ حاکم مستبد از هرآنچه مردم به آن «باور» دارند، نردبانی برای صعود به جایگاه خدایی می‌سازد. این کار، فارغ از ارزشِ خودِ آن باور، مصداق بارز «خدعه و سوءاستفاده» است. </p>
-		<p>موسی (ع)؛ پیشگام رهایی و آزادی: در این نگاه، حضرت موسی (ع) را باید یکی از پیشگامان بزرگ آزادی دانست. مأموریت او صرفاً یک مأموریت مذهبی نبود، بلکه یک حرکت آزادی‌خواهانه برای شکستن زنجیرِ «قیومیت فرعون» بر انسان‌ها بود. او برخاست تا انسان را از بندگیِ انسان رها کند و آن‌ها را به سوی «حقیقت بی‌واسطه» و خرد آزاد رهنمون شود. </p>
-		<p>شرک در لباس مذهب: طرفداران این نظام‌های پادگانی غالباً منتقدان را به «کفر» متهم می‌کنند، اما در واقعیت، خودِ ایشان مصداق بارز شرک هستند؛ زیرا انسانی ممکن‌الخطا را در جایگاه قدسیِ خداوند نشانده و اراده‌ی شخصی او را جایگزین حقیقت مطلق کرده‌اند. آن‌ها ترازوی خرد را از دست ملت می‌گیرند تا خود، تنها ترازوی حق و باطل باشند. </p>
-
-		
-		
-	
-    </section>
-	
-	
-	
-	<section id="section3">
-        <h2>بخش سوم: توحید به مثابه رهایی؛ نفی هرگونه واسطه‌ی مقدس</h2>
-        <p>قرآن با توصیف شکوه حق، تأکید می‌کند که قدوسیّت تنها متعلق به اوست (حشر: ۲۳) و بساطِ واسطه‌گری را جمع می‌کند:</p>
-		
-		<div class="image-wrapper">
-            <img src="img/fig4.jpg" alt="تاکید بر صفات خدا در دیدگاه تک خدایی ادیان ابراهیمی">
-            <span class="image-caption">تاکید بر صفات خدا در دیدگاه تک خدایی ادیان ابراهیمی</span>
+    <section id="section1">
+        <div class="content-fa">
+			<h2>بخش اول:  قوانین طبیعت و اراده انسان؛ تنها فصل مشترک  </h2>
+				<p> یکی از بزرگترین مغالطه‌هایی که خرد بشر را به زنجیر می‌کشد، واگذاری تمام مسئولیت‌ها به نیروهای غیبی و نادیده گرفتن سهم «عمل» و «قانون» است. برای خروج از این بن‌بست فکری، باید بر روی یک اصل جهان‌شمول توافق کنیم که مبنای تمام گفتگوهای عقلانی است: جهان توسط «قوانین تغییرناپذیر طبیعت» و «اراده و اختیار آزاد انسان» اداره می‌شود.   </p>
+				<p> این یک اصل عینی است. پذیرش اختیار، سنگ‌بنای تمام نظام‌های حقوقی و اخلاقی جهان است. اگر اختیار نباشد، نه جرمی معنا دارد و نه جزا؛ هیچ قاتلی را نمی‌توان محکوم کرد و هیچ قهرمانی را نمی‌توان ستود. حتی زمانی که با تسلط یک زورگو روبرو هستیم، این دو اصل نقض نمی‌شوند؛ در آنجا نیز با سوءاستفاده از «اراده آزاد» یک انسان و بهره‌گیری از ابزارهای قدرت (مبتنی بر قوانین طبیعت) روبرو هستیم، نه یک تقدیرِ ناگزیر و آسمانی.   </p>
+				<p> تفاوت در نگاه‌ها، تنها در تفسیر منشأ این دو اصل است:  </p>
+				<p>  ۱. یکتاپرستان حقیقی معتقدند این قوانین و این قدرتِ اختیار، توسط خالقی یگانه طراحی و به انسان تفویض شده است.  </p>
+				<p>  ۲. ناباوران آن را برآمده از فرآیندهای مادی و تکاملی می‌دانند.   </p>
+				<p> ۳. موهوم‌پرستان اما، با نسبت دادن هر رویدادی به اراده‌های شخصی‌سازی شده و خارج از قانونمندی طبیعت، هم به ساحت خرد توهین می‌کنند و هم راه را بر مسئولیت‌پذیری انسان می‌بندند.   </p>
+				<p> خدا با این جزئیات کاری ندارد! این جمله، نفیِ آفریدگار نیست؛ بلکه تکریمِ قانونی است که وضع شده تا جهان بر پایه اختیار آزادِ تنفیذ شده به بشر خردمند بچرخد؛ آنجا که انسان با شناخت قوانین طبیعت، آن‌ها را برای زندگی بهتر به کار می‌گیرد و این عینِ «عدالت» است.   </p>
+				<p> در دنیای مبتنی بر دانش، پذیرش این دو اصل ما را از انتظار برای معجزه یا ترس از خرافه می‌رهاند. ما نه قربانیانِ بی‌اراده‌ی سرنوشت، بلکه ناظران و بازیگرانی خردمند هستیم که باید با شناخت قوانین هستی، سرنوشت خود را با اراده‌ای آزاد رقم بزنیم.   </p>
         </div>
-		
-        <p><strong>نفی سرپرستی غیرخدا: «...وَمَا لَكُمْ مِنْ دُونِ اللَّهِ مِنْ وَلِيٍّ وَلَا نَصِيرٍ» (بقره: ۱۰۷)</strong></p>
-		
+        <div class="content-en">
+			<h2>Part One: The Laws of Nature and Human Will; The Sole Common Ground</h2>
+
+				<p>One of the most significant fallacies that chains human wisdom is the delegation of all responsibility to metaphysical forces and the subsequent disregard for the role of "action" and "law." To escape this intellectual deadlock, we must reach a consensus on a universal principle that serves as the foundation for all rational discourse: the world is governed by "the immutable laws of nature" and "the free will and agency of man."</p>
+
+				<p>This is an objective principle. The acceptance of free will is the cornerstone of every legal and moral system in the world. Without free will, neither crime nor punishment possesses meaning; no murderer could be condemned, and no hero could be praised. Even when confronted with the dominance of a tyrant, these two principles are not violated; rather, we are witnessing the abuse of one human’s "free will" and the exploitation of the tools of power (grounded in natural laws), not an inevitable or celestial destiny.</p>
+
+				<p>The divergence in perspectives lies only in the interpretation of the source of these two principles:</p>
+
+				<p>1. True monotheists believe that these laws and this power of free will were designed and delegated to humanity by a sole Creator.</p>
+
+				<p>2. Non-believers regard them as the result of material and evolutionary processes.</p>
+
+				<p>3. Superstition-worshippers, however, by attributing every event to personalized wills existing outside the lawfulness of nature, both insult the sanctity of wisdom and obstruct the path to human accountability.</p>
+
+				<p>"God is not preoccupied with such details!" This statement is not a denial of the Creator; rather, it is an exaltation of the Law established so that the world may revolve upon the axis of free will delegated to wise humanity. In this framework, when man recognizes the laws of nature and employs them for a better life, it is the very essence of "Justice."</p>
+
+				<p>In a world grounded in knowledge, the acceptance of these two principles liberates us from the expectation of miracles or the fear of superstition. We are not the choiceless victims of fate, but rather rational observers and actors who must forge our own destiny with free will through the understanding of the laws of existence.</p>        </div>
         <div class="image-wrapper">
-            <img src="img/fig3.jpg" alt="تاکید بر اینکه هیچ ولی و یاوری به جز خدا وجود ندارد">
-            <span class="image-caption">تاکید بر اینکه هیچ ولی و یاوری به جز خدا وجود ندارد</span>
+            <img src="img/fig2.jpg" alt="Nature and Reason">
+            <span class="image-caption content-fa">تاکید بر قوانین طبیعت و عقل و خرد انسان</span>
+            <span class="image-caption content-en">Emphasis on natural laws and human reason</span>
         </div>
-		
-        <p><strong>نفی شفاعت و واسطه‌گری: «لَيْسَ لَهُمْ مِنْ دُونِهِ وَلِيٌّ وَلَا شَفِيعٌ...» (انعام: ۵۱)</strong></p>
-		
-        <div class="image-wrapper">
-            <img src="img/fig5.jpg" alt="فی شفاعت و واسطه‌گری">
-            <span class="image-caption">فی شفاعت و واسطه‌گری</span>
-        </div>		
-		
-		<p><strong> بنابراین توحید یعنی هیچ انسانی، در هیچ مقامی، واسطه‌ی اجباری میان خرد و حقیقت نیست. نظام‌های مبتنی بر ولایتِ بشری با تبدیل «شخص» به موجودی مقدس، به بساط شمنیسم و فرعونیت بازگشته‌اند. بازگشت به خرد، در گرو گذر از این بت‌پرستی و بازپس‌گیری «اختیارِ آزاد» است. </strong></p>
-		
     </section>
-	
+
+    <section id="section2">
+        <div class="content-fa">
+			<h2>بخش دوم:  عبور از «شخص مقدس» به سوی «امر مقدس»</h2>
+				<p>بنیادی‌ترین رسالت خردورزی در مسیر توحید، فروپاشیدن بساط «شخصیت‌پرستی» و جایگزینی آن با حاکمیت «امر مقدس یا حقیقت»  است. بزرگترین مغالطه‌ای که تمدن‌ها را به بند می‌کشد، بازگشت به عصر بت‌پرستی در لباسی جدید است؛ جایی که یک «انسان» جایگزین «حقیقت» می‌شود.  </p>
+				<p><strong> انسان‌انگاری تا فرشته‌انگاری </strong></p>
+				<p>ذهن‌های خردگریز در درک مفاهیم مجرد ناتوانند و تمایل دارند حق و عدل را در قالب یک بت انسانی تجسم کنند (Anthropomorphism). جریان‌های تمامیت‌خواه با بهره‌گیری از این ضعف، نوعی «فرشته‌انگاری» از شخصیت‌ها ایجاد می‌کنند تا آن‌ها را به مقام «معصومیت مطلق» ارتقا دهند. هدف این مغلطه، غیرقابل نقد کردنِ شخص است. وقتی کسی معصوم فرض شد، نقد او «کفر» تلقی شده و راه بر خرد بسته می‌شود. </p>
+				
+			
+				<p><strong> خرد؛ رسول باطنی در برابر حبسِ عقل </strong></p>
+				<p>در دیدگاه خردگرایانه، از «عقل» به عنوان رسول باطنی یاد شده است؛ یعنی همان‌گونه که پیامبران رسولان ظاهری هستند، خرد نیز فرستاده‌ی خداوند در درون هر انسان است. بنابراین، تمرکزِ اصیل باید بر اختیار و اراده‌ی انسان عاقل و خردگرا باشد. حبس کردنِ عقل در اراده‌ی تنها یک نفر (با هر عنوانی اعم از ولی، خلیفه یا قیم) در حقیقت نفیِ این رسول باطنی و تعطیل کردنِ ودیعه‌ی الهی در وجود تک‌تک انسان‌هاست. </p>
+				
+				<p><strong>تقابل آزادیِ  با استبداد ؛ از نظم پادگانی تا اسارت دینی </strong></p>
+				<p>با کالبدشکافی مفاهیمی چون ولایت مطلق، خلافت و قیومیت بشری، به یک حقیقت عریان می‌رسیم: این‌ها در واقعیت چیزی جز یک «نظم پادگانی» نیستند که توسط ساختارهای نظامی و شبه‌نظامی ترویج می‌شوند. در یک پادگان، «اطاعت کورکورانه» بزرگترین فضیلت است، اما در نظام خردمحورِ حقیقت، «اختیار» و «آزادی» اساس خلقت انسان است. </p>
+				<p>  الگوی ماندگار فرعون: مالکیت بر جان و مال هر نوع حکومتی که اراده‌ی خود را بر مردم تحمیل کند، در حقیقت بازتولید الگوی «فرعون» است. فرعون نیز یک حکومت دینی بود؛ او تنها یک حاکم سیاسی نبود، بلکه با ادعای مقام قدسی، مردم را ترغیب به پرستش خود می‌کرد و جان، مال و حتی سرنوشت بنی‌اسرائیل را از آنِ خود می‌دانست. این دقیقاً همان ادعایی است که امروز تحت نام «ولایت فقیه» مطرح می‌شود: ادعای مالکیت بر مقدرات ملی تحت پوشش نیابت الهی.</p>
+				<p>خدعه‌ی کسب اتوریته از مقدسات: تاریخ نشان می‌دهد که این روش همیشگی حکومت‌های تمامیت‌خواه بوده است: استفاده از آنچه مورد قبول عامه است برای کسب اتوریته (اقتدار). در این میان، اصلاً مهم نیست که جامعه‌ای موهوم‌پرست باشد، بی‌پناه باشد یا حتی یکتاپرست؛ حاکم مستبد از هرآنچه مردم به آن «باور» دارند، نردبانی برای صعود به جایگاه خدایی می‌سازد. این کار، فارغ از ارزشِ خودِ آن باور، مصداق بارز «خدعه و سوءاستفاده» است. </p>
+				<p>موسی (ع)؛ پیشگام رهایی و آزادی: در این نگاه، حضرت موسی (ع) را باید یکی از پیشگامان بزرگ آزادی دانست. مأموریت او صرفاً یک مأموریت مذهبی نبود، بلکه یک حرکت آزادی‌خواهانه برای شکستن زنجیرِ «قیومیت فرعون» بر انسان‌ها بود. او برخاست تا انسان را از بندگیِ انسان رها کند و آن‌ها را به سوی «حقیقت بی‌واسطه» و خرد آزاد رهنمون شود. </p>
+				<p>شرک در لباس مذهب: طرفداران این نظام‌های پادگانی غالباً منتقدان را به «کفر» متهم می‌کنند، اما در واقعیت، خودِ ایشان مصداق بارز شرک هستند؛ زیرا انسانی ممکن‌الخطا را در جایگاه قدسیِ خداوند نشانده و اراده‌ی شخصی او را جایگزین حقیقت مطلق کرده‌اند. آن‌ها ترازوی خرد را از دست ملت می‌گیرند تا خود، تنها ترازوی حق و باطل باشند. </p>
+
+	        </div>
+        <div class="content-en">
+			<h2>Part Two: Transitioning from the "Sacred Person" toward the "Sacred Principle"</h2>
+
+				<p>The most fundamental mission of rationalism on the path of monotheism is the dismantling of "personality cults" and replacing them with the sovereignty of the "Sacred Principle" or "Truth." The greatest fallacy that imprisons civilizations is the return to the era of idolatry in a new guise—a state where a "human being" is substituted for "Truth."</p>
+
+				<p><strong>From Anthropomorphism to Angelicism</strong></p>
+
+				<p>Rational-avoidant minds are incapable of grasping abstract concepts and tend to embody right and justice within the frame of a human idol (Anthropomorphism). Totalitarian movements exploit this weakness by creating a form of "angelicization" around certain personalities to elevate them to a status of "absolute infallibility." The objective of this fallacy is to render the person beyond criticism. Once an individual is assumed infallible, any critique of them is deemed "blasphemy," thereby sealing the gates of wisdom.</p>
+
+				<p><strong>Wisdom: The Internal Messenger versus the Imprisonment of Intellect</strong></p>
+
+				<p>In the rationalist view, "Reason" is referred to as the Internal Messenger; just as prophets are external messengers, wisdom is God’s envoy within every human being. Consequently, the authentic focus must remain on the agency and will of the rational, wise individual. Confining the intellect within the will of a single person—under any title, be it Wali, Caliph, or Custodian—is, in truth, a denial of this Internal Messenger and the suspension of the Divine Trust bestowed upon every individual.</p>
+
+				<p><strong>The Confrontation of Freedom and Despotism: From Garrison-like Order to Religious Captivity</strong></p>
+
+				<p>By dissecting concepts such as Absolute Waliship, Caliphate, and human Custodianship, we arrive at a naked truth: in reality, these are nothing more than a "Garrison-like order" promoted by military and semi-military structures. In a garrison, "blind obedience" is the highest virtue; however, in a Truth-centered rational system, "free will" and "freedom" are the very foundations of human creation.</p>
+
+				<p>The Enduring Pattern of Pharaoh: Ownership of Life and Property. Any form of government that imposes its personal will upon the people is, in fact, a reproduction of the "Pharaoh" model. Pharaoh, too, presided over a religious government; he was not merely a political ruler but claimed a sacred status, urging people to worship him and asserting ownership over the lives, property, and even the destiny of the Israelites. This is precisely the claim made today under the name of "Wilayat al-Faqih": a claim of ownership over national destinies under the cover of Divine Deputyship.</p>
+
+				<p>The Deception of Acquiring Authority from the Sacred: History demonstrates that this has been the perennial method of totalitarian regimes: using what is commonly accepted by the masses to acquire "authority" (authoritas). In this process, it matters not whether a society is superstitious, vulnerable, or even monotheistic; the despotic ruler builds a ladder to a god-like status using whatever the people "believe." This act, regardless of the inherent value of that belief, is a clear instance of "deception and abuse."</p>
+
+				<p>Moses (PBUH): The Pioneer of Liberation and Freedom. In this view, Prophet Moses (PBUH) must be regarded as one of the great pioneers of liberty. His mission was not merely religious, but a liberationist movement to break the chains of "Pharaoh’s Custodianship" over humanity. He rose to liberate man from the servitude of man and to lead them toward "unmediated truth" and free wisdom.</p>
+
+				<p>Shirk (Polytheism) in the Garb of Religion: Proponents of these garrison-style systems often accuse critics of "blasphemy," yet in reality, they themselves represent the ultimate form of Shirk; for they have seated a fallible human in the sacred position of God and replaced absolute truth with his personal will. They seize the "scales of wisdom" from the nation so that they alone may serve as the sole balance for right and wrong.</p>        </div>
+    </section>
+
+    <section id="section3">
+        <div class="content-fa">
+			<h2>بخش سوم: توحید به مثابه رهایی؛ نفی هرگونه واسطه‌ی مقدس</h2>
+				<p>قرآن با توصیف شکوه حق، تأکید می‌کند که قدوسیّت تنها متعلق به اوست (حشر: ۲۳) و بساطِ واسطه‌گری را جمع می‌کند:</p>
+				
+				<div class="image-wrapper">
+					<img src="img/fig4.jpg" alt="تاکید بر صفات خدا در دیدگاه تک خدایی ادیان ابراهیمی">
+					<span class="image-caption">تاکید بر صفات خدا در دیدگاه تک خدایی ادیان ابراهیمی</span>
+				</div>
+				
+				<p><strong>نفی سرپرستی غیرخدا: «...وَمَا لَكُمْ مِنْ دُونِ اللَّهِ مِنْ وَلِيٍّ وَلَا نَصِيرٍ» (بقره: ۱۰۷)</strong></p>
+				
+				<div class="image-wrapper">
+					<img src="img/fig3.jpg" alt="تاکید بر اینکه هیچ ولی و یاوری به جز خدا وجود ندارد">
+					<span class="image-caption">تاکید بر اینکه هیچ ولی و یاوری به جز خدا وجود ندارد</span>
+				</div>
+				
+				<p><strong>نفی شفاعت و واسطه‌گری: «لَيْسَ لَهُمْ مِنْ دُونِهِ وَلِيٌّ وَلَا شَفِيعٌ...» (انعام: ۵۱)</strong></p>
+				
+				<div class="image-wrapper">
+					<img src="img/fig5.jpg" alt="فی شفاعت و واسطه‌گری">
+					<span class="image-caption">فی شفاعت و واسطه‌گری</span>
+				</div>		
+				
+				<p><strong> بنابراین توحید یعنی هیچ انسانی، در هیچ مقامی، واسطه‌ی اجباری میان خرد و حقیقت نیست. نظام‌های مبتنی بر ولایتِ بشری با تبدیل «شخص» به موجودی مقدس، به بساط شمنیسم و فرعونیت بازگشته‌اند. بازگشت به خرد، در گرو گذر از این بت‌پرستی و بازپس‌گیری «اختیارِ آزاد» است. </strong></p>
+			
+        </div>
+        <div class="content-en">
+            <h2>Part Three: Monotheism as Liberation; Negation of Any Sacred Intermediary</h2>
+				<p>By describing the glory of the Truth, the Quran emphasizes that holiness belongs solely to Him (Al-Hashr: 23) and dismantles the establishment of mediation:</p>
+
+				<div class="image-wrapper">
+					<img src="img/fig4.jpg" alt="Emphasis on the attributes of God in the monotheistic perspective of Abrahamic religions">
+					<span class="image-caption">Emphasis on the attributes of God in the monotheistic perspective of Abrahamic religions</span>
+				</div>
+
+				<p><strong>Negation of guardianship other than God: "...And you have besides Allah no guardian or helper." (Al-Baqarah: 107)</strong></p>
+
+				<div class="image-wrapper">
+					<img src="img/fig3.jpg" alt="Emphasis that there is no guardian or helper except God">
+					<span class="image-caption">Emphasis that there is no guardian or helper except God</span>
+				</div>
+
+				<p><strong>Negation of intercession and mediation: "There is for them besides Him no guardian and no intercessor..." (Al-An'am: 51)</strong></p>
+
+				<div class="image-wrapper">
+					<img src="img/fig5.jpg" alt="Negation of intercession and mediation">
+					<span class="image-caption">Negation of intercession and mediation</span>
+				</div>		
+
+				<p><strong>Therefore, monotheism implies that no human, in any capacity, is a compulsory intermediary between wisdom and truth. Systems based on human "guardianship" (Wilayah), by transforming a "person" into a sacred entity, have regressed to the practices of Shamanism and Pharaonism. Returning to wisdom is contingent upon transcending this idolatry and reclaiming "free will."</strong></p>        </div>
+        <div class="image-wrapper">
+            <img src="img/fig3.jpg" alt="No Guardian but God">
+            <span class="image-caption content-fa">تاکید بر اینکه هیچ ولی و یاوری به جز خدا وجود ندارد</span>
+            <span class="image-caption content-en">Emphasis that there is no guardian or helper except God</span>
+        </div>
+    </section>
+
     <section id="section4">
-        <h2>بخش چهارم:  امتناع خرد در  مغالطه‌ی نفی «زمان و مکان»</h2>
-        <p> نخستین و مهلک‌ترین ضربه‌ای که تفکر فقهی بر پیکره‌ی خرد ناب وارد می‌سازد، نادیده گرفتنِ عامدانه‌ی عنصر «زمان و مکان» است. فقها با اصراری غریب، در تلاش‌اند تا الگوهای زیستی و معیشتی اعراب شبه‌جزیره در ۱۴۰۰ سال پیش را به عنوان نسخه‌ای ابدی برای اداره‌ی جامعه‌ی پیچیده‌ی ایران در قرن ۲۱ تحمیل کنند. این رویکرد، نه یک خطای ساده، بلکه یک مغلطه‌ی بنیادین است؛ چرا که حتی با فرض اینکه شخصیت‌های تاریخی دوره  پیامبر، شخصیت‌هایی به نسبت مثبت بوده‌اند، باز هم تبدیل رفتار و گفتار متناسب با «جاهلیت حجاز» به مبنای حقوقیِ یک ملت در عصر تکنولوژی، نفی صریح عقلانیت بشری است. در واقع، فضایل فردی یک شخصیت در دل تاریخ، هرگز مجوزی برای تبدیل ترجیحات و احکام زمانی او به «قانون لایتغیر» برای اعصار بعد نیست. </p>
-		<p> باید به این حقیقت تاریخی اذعان کرد که ظهور هر مکتبی در بستر تاریخ، یک «پروسه» و فرآیند متناسب با ظرفیت‌های همان عصر بوده است. این تصور که با ظهور یک آیین، ناگهان جوامع از تمام پیوندهای زمانی خود گسسته و به کمال مطلق رسیده‌اند، خیالی باطل است. بنابراین چرا باید روش زندگی گذشتگان که اتفاقاً هیچ نشانی از جامعه آرمانی هم نداشته مبنای اداره جامعه مدرن قرار بگیرد؟  </p>
-		<p> بحث «اقتضای زمان و مکان» محدود به یک دوره‌ی خاص هم نیست؛ چه ۳۵۰۰ سال پیش در عصر کنعانیان، چه ۲۵۰۰ سال پیش در عهد باستان و چه ۱۴۰۰ سال پیش، بشر همواره درگیر محدودیت‌های ادراکی و ابزاری زمانه‌ی خویش بوده است و این روش ها قابل بسط به دنیای امروزی نیست. </p>
-		
-		
-        <div class="image-wrapper">
-            <img src="img/fig6.jpg" alt="تاکید قرآن بر متناسب بودن شرایط زمان و مکان و نسخ آیات">
-            <span class="image-caption">تاکید قرآن بر متناسب بودن شرایط زمان و مکان و نسخ آیات </span>
-        </div>
-		
-		<p>  در حقیقت، تا پیش از قرون ۱۷ و ۱۸ میلادی، به دلیل سادگی ساختار جوامع و محدودیت جمعیت، شاید مدل «مقدس‌سازی یک فرد» به عنوان راهکاری برای حفظ نظم نیم‌بند قبیله‌ای عمل می‌کرد، اما با توسعه جوامع و خصوصاً گسترش بی‌سابقه‌ی جمعیت، دیگر غیرممکن است که یک «شخص» بتواند کل جامعه را با تمام پیچیدگی‌هایش اداره کند. در واقع، درجا زدنِ تمدن‌ها در طول تاریخ، دقیقاً از همین‌جا نشات گرفته است: حبس کردن پتانسیل بیکران خرد جمعی در قفس تنگ اراده و تشخیص یک نفر. </p>
+        <div class="content-fa">
+			<h2>بخش چهارم:  امتناع خرد در  مغالطه‌ی نفی «زمان و مکان»</h2>
+				<p> نخستین و مهلک‌ترین ضربه‌ای که تفکر فقهی بر پیکره‌ی خرد ناب وارد می‌سازد، نادیده گرفتنِ عامدانه‌ی عنصر «زمان و مکان» است. فقها با اصراری غریب، در تلاش‌اند تا الگوهای زیستی و معیشتی اعراب شبه‌جزیره در ۱۴۰۰ سال پیش را به عنوان نسخه‌ای ابدی برای اداره‌ی جامعه‌ی پیچیده‌ی ایران در قرن ۲۱ تحمیل کنند. این رویکرد، نه یک خطای ساده، بلکه یک مغلطه‌ی بنیادین است؛ چرا که حتی با فرض اینکه شخصیت‌های تاریخی دوره  پیامبر، شخصیت‌هایی به نسبت مثبت بوده‌اند، باز هم تبدیل رفتار و گفتار متناسب با «جاهلیت حجاز» به مبنای حقوقیِ یک ملت در عصر تکنولوژی، نفی صریح عقلانیت بشری است. در واقع، فضایل فردی یک شخصیت در دل تاریخ، هرگز مجوزی برای تبدیل ترجیحات و احکام زمانی او به «قانون لایتغیر» برای اعصار بعد نیست. </p>
+				<p> باید به این حقیقت تاریخی اذعان کرد که ظهور هر مکتبی در بستر تاریخ، یک «پروسه» و فرآیند متناسب با ظرفیت‌های همان عصر بوده است. این تصور که با ظهور یک آیین، ناگهان جوامع از تمام پیوندهای زمانی خود گسسته و به کمال مطلق رسیده‌اند، خیالی باطل است. بنابراین چرا باید روش زندگی گذشتگان که اتفاقاً هیچ نشانی از جامعه آرمانی هم نداشته مبنای اداره جامعه مدرن قرار بگیرد؟  </p>
+				<p> بحث «اقتضای زمان و مکان» محدود به یک دوره‌ی خاص هم نیست؛ چه ۳۵۰۰ سال پیش در عصر کنعانیان، چه ۲۵۰۰ سال پیش در عهد باستان و چه ۱۴۰۰ سال پیش، بشر همواره درگیر محدودیت‌های ادراکی و ابزاری زمانه‌ی خویش بوده است و این روش ها قابل بسط به دنیای امروزی نیست. </p>
+				
+				
+					<div class="image-wrapper">
+						<img src="img/fig6.jpg" alt="تاکید قرآن بر متناسب بودن شرایط زمان و مکان و نسخ آیات">
+						<span class="image-caption">تاکید قرآن بر متناسب بودن شرایط زمان و مکان و نسخ آیات </span>
+					</div>
+				
+				<p>  در حقیقت، تا پیش از قرون ۱۷ و ۱۸ میلادی، به دلیل سادگی ساختار جوامع و محدودیت جمعیت، شاید مدل «مقدس‌سازی یک فرد» به عنوان راهکاری برای حفظ نظم نیم‌بند قبیله‌ای عمل می‌کرد، اما با توسعه جوامع و خصوصاً گسترش بی‌سابقه‌ی جمعیت، دیگر غیرممکن است که یک «شخص» بتواند کل جامعه را با تمام پیچیدگی‌هایش اداره کند. در واقع، درجا زدنِ تمدن‌ها در طول تاریخ، دقیقاً از همین‌جا نشات گرفته است: حبس کردن پتانسیل بیکران خرد جمعی در قفس تنگ اراده و تشخیص یک نفر. </p>
 
-		
+	
+        </div>
+        <div class="content-en">
+			<h2>Part Four: The Refusal of Reason in the Fallacy of Negating "Time and Place"</h2>
+
+				<p>The first and most fatal blow that jurisprudential (Fiqhi) thinking deals to the body of pure wisdom is the intentional disregard for the elements of "time and place." With a peculiar persistence, jurists attempt to impose the biological and livelihood patterns of the Arabian Peninsula from 1400 years ago as an eternal blueprint for governing the complex society of 21st-century Iran. This approach is not a simple error but a fundamental fallacy; for even assuming that the historical figures of the Prophet's era were relatively positive personalities, transforming behaviors and speech suited to "Hajazi Ignorance" into the legal basis for a nation in the age of technology remains an explicit denial of human rationality. In fact, the individual virtues of a figure within the heart of history never serve as a license to transform their temporal preferences and edicts into "immutable laws" for subsequent ages.</p>
+
+				<p>One must acknowledge the historical truth that the emergence of any school of thought within the context of history was a "process"—a progression adapted to the capacities of that specific era. The notion that with the arrival of a faith, societies were suddenly severed from all temporal ties and reached absolute perfection is a vain illusion. Therefore, why should the lifestyle of predecessors—which, incidentally, bore no signs of a utopian society—serve as the basis for governing a modern society?</p>
+
+				<p>The discussion of "the exigencies of time and place" is not limited to a specific period; whether 3500 years ago in the Canaanite era, 2500 years ago in antiquity, or 1400 years ago, humanity has always been entangled in the cognitive and instrumental limitations of its time, and these methods cannot be extended to the contemporary world.</p>
+
+				<div class="image-wrapper">
+					<img src="img/fig6.jpg" alt="Quranic emphasis on the suitability of conditions of time and place and the abrogation of verses">
+					<span class="image-caption">Quranic emphasis on the suitability of conditions of time and place and the abrogation of verses</span>
+				</div>
+
+				<p>In truth, prior to the 17th and 18th centuries, due to the simplicity of social structures and limited populations, the model of "sacralizing an individual" might have functioned as a solution for maintaining a fragile tribal order. However, with the development of societies—and particularly the unprecedented expansion of population—it is no longer possible for a single "person" to manage an entire society with all its complexities. In fact, the stagnation of civilizations throughout history originates precisely from this point: the imprisonment of the infinite potential of collective wisdom within the narrow cage of one individual's will and discernment.</p>
+
     </section>
 
     <section id="section5">
-        <h2>بخش پنجم:  فقه توهم؛ حاکمیت «موهومات» بر مقدرات ملی</h2>
-        <p> با کالبدشکافی دقیق‌تر حقوق فعلی ایران، به حقیقتی هولناک می‌رسیم: این نظامِ حقوقی نه بر مبنای خرد، بلکه بر پایه‌ی یک «سازه موهوم» بنا شده است. به نظر می‌رسد متولیان این تفکر، چون راهی برای ادعای پیامبری پیشِ روی خود نمی‌دیدند، با خلق یک «شخصیت موهوم» در پس پرده‌ی غیبت، رانت مقدسی برای خود دست و پا کردند تا در غیاب او، «اراده‌ی شخصیِ» خود را تحت نام «نیابت»، قانون جلوه دهند.  </p>
-		<p> این دقیقاً همان بن‌بستی است که قرآن بارها نسبت به آن هشدار داده است. آنجا که می‌فرماید:  </p>
-		
-	
-        <div class="image-wrapper">
-            <img src="img/fig7.jpg" alt="اشاره به موهوم پرسی بعضی در قرآن">
-            <span class="image-caption">اشاره به موهوم پرسی بعضی در قرآن</span>
-        </div> 
-		
-		<p> سردمداران این تفکر، با جایگزینیِ «حقیقت عینی» با «موهومات کلامی»، جامعه را در وضعیتی قرار داده‌اند که در آن، وهم یک نفر بر خرد یک ملت برتری یافته است. اینجاست که ردپای همان هشدار قرآنی درباره‌ی نفوذ شیطان در لباس مقدسات و کلام آراسته آشکار می‌شود: </p>
+        <div class="content-fa">
+			<h2>بخش پنجم:  فقه توهم؛ حاکمیت «موهومات» بر مقدرات ملی</h2>
+				<p> با کالبدشکافی دقیق‌تر حقوق فعلی ایران، به حقیقتی هولناک می‌رسیم: این نظامِ حقوقی نه بر مبنای خرد، بلکه بر پایه‌ی یک «سازه موهوم» بنا شده است. به نظر می‌رسد متولیان این تفکر، چون راهی برای ادعای پیامبری پیشِ روی خود نمی‌دیدند، با خلق یک «شخصیت موهوم» در پس پرده‌ی غیبت، رانت مقدسی برای خود دست و پا کردند تا در غیاب او، «اراده‌ی شخصیِ» خود را تحت نام «نیابت»، قانون جلوه دهند.  </p>
+				<p> این دقیقاً همان بن‌بستی است که قرآن بارها نسبت به آن هشدار داده است. آنجا که می‌فرماید:  </p>
+				
+			
+				<div class="image-wrapper">
+					<img src="img/fig7.jpg" alt="اشاره به موهوم پرسی بعضی در قرآن">
+					<span class="image-caption">اشاره به موهوم پرسی بعضی در قرآن</span>
+				</div> 
+				
+				<p> سردمداران این تفکر، با جایگزینیِ «حقیقت عینی» با «موهومات کلامی»، جامعه را در وضعیتی قرار داده‌اند که در آن، وهم یک نفر بر خرد یک ملت برتری یافته است. اینجاست که ردپای همان هشدار قرآنی درباره‌ی نفوذ شیطان در لباس مقدسات و کلام آراسته آشکار می‌شود: </p>
 
-        <div class="image-wrapper">
-            <img src="img/fig8.jpg" alt="اشاره به موهوم پرسی بعضی در قرآن">
-            <span class="image-caption">اشاره به موهوم پرسی بعضی در قرآن </span>
-        </div> 
+				<div class="image-wrapper">
+					<img src="img/fig8.jpg" alt="اشاره به موهوم پرسی بعضی در قرآن">
+					<span class="image-caption">اشاره به موهوم پرسی بعضی در قرآن </span>
+				</div> 
 
-		<p> این «زُخرف القول» یا سخنانِ آراسته، همان توجیهات فقهی است که تلاش می‌کند یک امر موهوم و غیرتاریخی را به عنوان «مقدس‌ترین اصل قانون اساسی» به خورد مردم بدهد. وقتی حقوق یک کشور از ساحت «عقل جمعی» خارج و به ساحت «اوهام فردی» منتقل شود، نتیجه‌اش چیزی جز «استفراغ استبداد قرون وسطایی» در قلب عصر مدرن نخواهد بود. در واقع، این نه یک نظام الهی، بلکه یک سیستم «شمنیسم حقوقی» است که در آن، عده‌ای مدعی ارتباط با یک موجود موهوم هستند تا از طریق این توهم، بر جان و مال و آزادی انسان‌ها چیره شوند. </p>
+				<p> این «زُخرف القول» یا سخنانِ آراسته، همان توجیهات فقهی است که تلاش می‌کند یک امر موهوم و غیرتاریخی را به عنوان «مقدس‌ترین اصل قانون اساسی» به خورد مردم بدهد. وقتی حقوق یک کشور از ساحت «عقل جمعی» خارج و به ساحت «اوهام فردی» منتقل شود، نتیجه‌اش چیزی جز «استفراغ استبداد قرون وسطایی» در قلب عصر مدرن نخواهد بود. در واقع، این نه یک نظام الهی، بلکه یک سیستم «شمنیسم حقوقی» است که در آن، عده‌ای مدعی ارتباط با یک موجود موهوم هستند تا از طریق این توهم، بر جان و مال و آزادی انسان‌ها چیره شوند. </p>
+		  
+
+
+        </div>
+        <div class="content-en">
+			<h2>Part Five: The Jurisprudence of Illusion; Sovereignty of "Myths" over National Destinies</h2>
+
+				<p>By dissecting the current legal landscape of Iran with greater precision, we arrive at a terrifying truth: this legal system is built not on the foundations of wisdom, but upon an "illusory construct." It appears that the custodians of this mindset, seeing no path to claim actual prophecy for themselves, fabricated a "mythical persona" behind the veil of occultation. In doing so, they secured a sacred rent for themselves so that, in his absence, they could portray their "personal will" as law under the name of "Deputyship" (Niabat).</p>
+
+				<p>This is precisely the intellectual dead-end that the Quran repeatedly warns against. As it states:</p>
+
+				<div class="image-wrapper">
+					<img src="img/fig7.jpg" alt="Quranic reference to those who follow illusions">
+					<span class="image-caption">Quranic reference to the worship of illusions and myths.</span>
+				</div> 
+
+				<p>The leaders of this ideology, by replacing "objective truth" with "verbal illusions," have placed society in a state where the delusion of one person trumps the wisdom of an entire nation. Here, the traces of the Quranic warning regarding Satanic influence—cloaked in the garb of sanctity and "decorated words"—become manifest:</p>
+
+				<div class="image-wrapper">
+					<img src="img/fig8.jpg" alt="Quranic reference to decorated speech">
+					<span class="image-caption">Reference to the worship of illusions and myths as mentioned in the Quran.</span>
+				</div> 
+
+				<p>This "Zukhruf al-Qawl" (Gilded Speech) or decorated words consist of those very jurisprudential justifications that attempt to force-feed an illusory and ahistorical matter to the people as the "most sacred principle of the constitution." When the rights of a country are extracted from the realm of "collective reason" and transferred to the realm of "individual delusions," the result is nothing but the "regurgitation of medieval despotism" in the heart of the modern era. In fact, this is not a divine system, but a form of "Juridical Shamanism," where a group claims a connection to a mythical being to dominate the lives, property, and freedom of human beings through this very illusion.</p>
+
+       </div>
+        <div class="image-wrapper">
+            <img src="img/fig8.jpg" alt="Illusions">
+            <span class="image-caption content-fa">اشاره به موهوم پرستی بعضی در قرآن</span>
+            <span class="image-caption content-en">Reference to the worship of illusions in the Quran</span>
+        </div>
     </section>
 
     <section id="section6">
-        <h2>بخش ششم:  از عدالت مدرن تا بیداد شبه قدسی</h2>
-        <p> با این تحلیل، ریشه‌ی دشمنی دیرینه‌ی فقها با «عقل مدرن محاسبه‌گر» به وضوح عیان می‌شود. عقل مدرن، با ابزار نقد و بررسی شواهد، هرگونه ادعای بدون پشتوانه را به چالش می‌کشد؛ بنابراین، خریدار تفکر فقهی موجود، تنها کسانی هستند که یا دچار ضعف قوای عقلی‌اند و یا در اثر القائات تخدیرگونه، قدرت تمیز میان «واقعیت» و «وهم» را از دست داده‌اند. در واقع، این نظام حقوقی تنها در فضایی رشد می‌کند که خرد در آن تعطیل و «تخدیر ذهنی» جایگزین «تحلیل عینی» شده باشد.</p>
-		<p>در اینجا باید بر این مغالطه‌ی بزرگ در مفهوم «عدالت» انگشت گذاشت. عدالت، نه یک دستورالعمل نازل شده از آسمان اوهام، بلکه یک مفهوم مدرن و بشری است که انسان برای حفظ پایداری جامعه و تضمین همزیستی مسالمت‌آمیز آن را ابداع کرده است. نگاهی به جهان معاصر، این حقیقت را اثبات می‌کند: </p>
-		<p> در کشورهایی که عدالت را به عنوان قراردادی اجتماعی و مبتنی بر حقوق بشر پذیرفته‌اند، شاهدیم که عدالت نسبی در پرتو آزادی محقق شده است؛ زیرا در آنجا قانون، محصول خرد جمعی است نه اراده‌ی یک موجود موهوم و نائب او. اما در مقابل، در کشورهایی نظیر ایران که مدعی دستیابی به «عدالت قدسی» هستند، آنچه در عمل مشاهده می‌شود چیزی جز ظلم عمیق، تبعیض و بیداد ساختاریافته نیست.</p>
-        
-		<div class="image-wrapper">
-            <img src="img/fig9.jpg" alt="تاکید بر اسباب و وسایل زمینی سنجش برای برقراری عدالت">
-            <span class="image-caption">تاکید بر اسباب و وسایل زمینی سنجش برای برقراری عدالت </span>
-        </div> 		
-		
-		<p>ادعای عدالت قدسی، تنها پوششی است برای فرار از پاسخگویی؛ چرا که وقتی عدالت به امری «ماورایی» و «نیابتی» تبدیل شود، دیگر با خط‌کش خرد بشری قابل اندازه‌گیری نیست و راه برای هرگونه جنایت تحت نام مقدس باز می‌گردد. حقیقت تلخ این است که میان «توهم عدالت الهی فقها» و «عدالت واقعی انسانی»، دره‌ای به ژرفای تمام قرون وسطی فاصله است. </p>
-		<p>نکته دیگر در خصوص واقعیتِ عینی و در عین حال تکان‌دهنده در نشانه این تخدیر ذهنی، برخورد دوگانه با مقوله‌ی «تخدیر» در ایران است. مقابله‌ی سرسختانه با الکل (که بعضاً مظهر شادی اجتماعی و  هوشیاری منتقدانه است) در کنار اغماض و حتی همراهی و تشویق مصرف مخدرهایی که ذهن را به انفعال، خمودگی و خیال‌پردازی می‌کشاند، تصادفی نیست. </p>
-		<p>این رویکرد، بازتولید همان الگوی قدیم «شمنیسم» است؛ جایی که استفاده از مواد روانگردان و مخدر، ابزاری بود برای ایجاد توهم «شهود» و ادعای «ارتباط با غایب موهوم». وقتی ذهن در اثر تخدیر (چه فیزیکی و چه ایدئولوژیک) از واقعیت عینی فاصله می‌گیرد، پذیرش «موجودات موهوم» و «قوانین فرازمانی» آسان‌تر می‌شود. در حقیقت، گسترش قلیان‌خانه ها و افزودنی‌های ناشناخته در آنها، استعاره‌ای از همان فقهی هستند که با از کار انداختن قوای نقادانه‌ی عقل، جامعه را به خواب عمیق قرون وسطایی فرو می‌برد تا کسی نپرسد: «چگونه اراده‌ی یک شخص غایب، جایگزین خرد زنده‌ی میلیون‌ها انسان شده است؟» </p>
-		<p> </p>
-		<p> </p>
-		<p> </p>
-		
+        <div class="content-fa">
+			<h2>بخش ششم:  از عدالت مدرن تا بیداد شبه قدسی</h2>
+				<p> با این تحلیل، ریشه‌ی دشمنی دیرینه‌ی فقها با «عقل مدرن محاسبه‌گر» به وضوح عیان می‌شود. عقل مدرن، با ابزار نقد و بررسی شواهد، هرگونه ادعای بدون پشتوانه را به چالش می‌کشد؛ بنابراین، خریدار تفکر فقهی موجود، تنها کسانی هستند که یا دچار ضعف قوای عقلی‌اند و یا در اثر القائات تخدیرگونه، قدرت تمیز میان «واقعیت» و «وهم» را از دست داده‌اند. در واقع، این نظام حقوقی تنها در فضایی رشد می‌کند که خرد در آن تعطیل و «تخدیر ذهنی» جایگزین «تحلیل عینی» شده باشد.</p>
+				<p>در اینجا باید بر این مغالطه‌ی بزرگ در مفهوم «عدالت» انگشت گذاشت. عدالت، نه یک دستورالعمل نازل شده از آسمان اوهام، بلکه یک مفهوم مدرن و بشری است که انسان برای حفظ پایداری جامعه و تضمین همزیستی مسالمت‌آمیز آن را ابداع کرده است. نگاهی به جهان معاصر، این حقیقت را اثبات می‌کند: </p>
+				<p> در کشورهایی که عدالت را به عنوان قراردادی اجتماعی و مبتنی بر حقوق بشر پذیرفته‌اند، شاهدیم که عدالت نسبی در پرتو آزادی محقق شده است؛ زیرا در آنجا قانون، محصول خرد جمعی است نه اراده‌ی یک موجود موهوم و نائب او. اما در مقابل، در کشورهایی نظیر ایران که مدعی دستیابی به «عدالت قدسی» هستند، آنچه در عمل مشاهده می‌شود چیزی جز ظلم عمیق، تبعیض و بیداد ساختاریافته نیست.</p>
+				
+				<div class="image-wrapper">
+					<img src="img/fig9.jpg" alt="تاکید بر اسباب و وسایل زمینی سنجش برای برقراری عدالت">
+					<span class="image-caption">تاکید بر اسباب و وسایل زمینی سنجش برای برقراری عدالت </span>
+				</div> 		
+				
+				<p>ادعای عدالت قدسی، تنها پوششی است برای فرار از پاسخگویی؛ چرا که وقتی عدالت به امری «ماورایی» و «نیابتی» تبدیل شود، دیگر با خط‌کش خرد بشری قابل اندازه‌گیری نیست و راه برای هرگونه جنایت تحت نام مقدس باز می‌گردد. حقیقت تلخ این است که میان «توهم عدالت الهی فقها» و «عدالت واقعی انسانی»، دره‌ای به ژرفای تمام قرون وسطی فاصله است. </p>
+				<p>نکته دیگر در خصوص واقعیتِ عینی و در عین حال تکان‌دهنده در نشانه این تخدیر ذهنی، برخورد دوگانه با مقوله‌ی «تخدیر» در ایران است. مقابله‌ی سرسختانه با الکل (که بعضاً مظهر شادی اجتماعی و  هوشیاری منتقدانه است) در کنار اغماض و حتی همراهی و تشویق مصرف مخدرهایی که ذهن را به انفعال، خمودگی و خیال‌پردازی می‌کشاند، تصادفی نیست. </p>
+				<p>این رویکرد، بازتولید همان الگوی قدیم «شمنیسم» است؛ جایی که استفاده از مواد روانگردان و مخدر، ابزاری بود برای ایجاد توهم «شهود» و ادعای «ارتباط با غایب موهوم». وقتی ذهن در اثر تخدیر (چه فیزیکی و چه ایدئولوژیک) از واقعیت عینی فاصله می‌گیرد، پذیرش «موجودات موهوم» و «قوانین فرازمانی» آسان‌تر می‌شود. در حقیقت، گسترش قلیان‌خانه ها و افزودنی‌های ناشناخته در آنها، استعاره‌ای از همان فقهی هستند که با از کار انداختن قوای نقادانه‌ی عقل، جامعه را به خواب عمیق قرون وسطایی فرو می‌برد تا کسی نپرسد: «چگونه اراده‌ی یک شخص غایب، جایگزین خرد زنده‌ی میلیون‌ها انسان شده است؟» </p>
+				<p> </p>
+				<p> </p>
+				<p> </p>
+        </div>
+        <div class="content-en">
+			<h2>Part Six: From Modern Justice to Pseudo-Sacred Oppression</h2>
+
+				<p>With this analysis, the root of the jurists' long-standing enmity toward "calculating modern reason" becomes clearly evident. Modern reason, equipped with the tools of critique and evidentiary review, challenges any claim lacking empirical support. Consequently, the only buyers of the existing jurisprudential thought are those who either suffer from weakened cognitive faculties or have lost the power to distinguish between "reality" and "illusion" due to the effects of sedative-like indoctrination. In fact, this legal system only thrives in an atmosphere where wisdom is suspended and "mental sedation" has replaced "objective analysis."</p>
+
+				<p>Here, one must point out the great fallacy regarding the concept of "Justice." Justice is not a set of instructions descended from a heaven of illusions, but a modern human concept invented by humanity to maintain social stability and guarantee peaceful coexistence. A look at the contemporary world proves this truth:</p>
+
+				<p>In countries that have accepted justice as a social contract based on human rights, we observe that relative justice has been realized in the light of freedom; for there, the law is a product of collective wisdom rather than the will of a mythical being and his deputy. Conversely, in countries like Iran that claim to have achieved "Sacred Justice," what is observed in practice is nothing but deep oppression, discrimination, and structured injustice.</p>
+
+				<div class="image-wrapper">
+					<img src="img/fig9.jpg" alt="Emphasis on earthly means of measurement for establishing justice">
+					<span class="image-caption">Emphasis on earthly means and measures for the establishment of justice.</span>
+				</div> 		
+
+				<p>The claim of sacred justice is merely a cover to escape accountability; for when justice is transformed into something "metaphysical" and "representative," it can no longer be measured by the yardstick of human reason, and the path is cleared for any crime to be committed under a sacred name. The bitter truth is that between the "jurists' illusion of divine justice" and "real human justice," there lies a chasm as deep as the entirety of the Middle Ages.</p>
+
+				<p>Another point regarding the objective and simultaneously shocking reality of this mental sedation is the dual approach toward "intoxication" in Iran. The fierce opposition to alcohol (which is often a symbol of social joy and critical alertness) alongside the tolerance—and even accompaniment and encouragement—of narcotics that lead the mind toward passivity, lethargy, and fantasizing, is no accident.</p>
+
+				<p>This approach is a reproduction of the ancient "Shamanistic" pattern, where the use of psychoactive substances and narcotics served as a tool to create the illusion of "intuition" and the claim of "communication with the mythical absent." When the mind, through sedation (whether physical or ideological), distances itself from objective reality, the acceptance of "illusory beings" and "trans-temporal laws" becomes easier. In truth, the expansion of hookah lounges and the unknown additives within them serve as a metaphor for that very Fiqh which, by disabling the critical faculties of the intellect, plunges society into a deep medieval sleep so that no one may ask: "How has the will of an absent person replaced the living wisdom of millions of human beings?"</p>
+        </div>
     </section>
 
     <section id="section7">
-        <h2>بخش هفتم:  نکته ای در مورد فریب در لوای حقیقت</h2>
-        <p>قبل از ارائه تحلیل نهایی و نتیجه‌گیری در مورد رفتار متولیان این نظام فکری، باید ذکر شود که در اینجا با پدیده‌ی «دروغگوی حرفه‌ای» روبرو هستیم. قدرت تخریب‌گری این جریان در آن است که ابتدا دروغ خود را (به عنوان حقیقتی قدسی) باور می‌کنند تا بتوانند بر بستر آن، یک «خط داستانی» منسجم و فریبنده بسازند. یکی از پیچیده‌ترین روش‌های خدعه، بیان بخشی از «واقعیت» با هدف تخریب آن است؛ به گونه‌ای که بار معنایی حقیقت را جابه‌جا کنند. برای مثال، در برابر نقدهای مستند و عقلانی و مبتنی بر متن اصیل قرآن، ماشین پروپاگاندا به جای پاسخ به محتوا، با «ترور شخصیت» و «انگ‌زنی امنیتی»، نیت نویسنده را هدف می‌گیرد تا ذهن مخاطب را از «اصل واقعیت» منحرف کرده و حقیقت را در پوششی از مفاهیم منفی و ترس‌آور پنهان سازد. این همان «خدعه‌ی فقهی» است که در آن، شنیدن کلام حق، به عنوان یک توطئه‌ی باطل بازنمایی می‌شود.</p>
+        <div class="content-fa">
+			<h2>بخش هفتم:  نکته ای در مورد فریب در لوای حقیقت</h2>
+				<p>قبل از ارائه تحلیل نهایی و نتیجه‌گیری در مورد رفتار متولیان این نظام فکری، باید ذکر شود که در اینجا با پدیده‌ی «دروغگوی حرفه‌ای» روبرو هستیم. قدرت تخریب‌گری این جریان در آن است که ابتدا دروغ خود را (به عنوان حقیقتی قدسی) باور می‌کنند تا بتوانند بر بستر آن، یک «خط داستانی» منسجم و فریبنده بسازند. یکی از پیچیده‌ترین روش‌های خدعه، بیان بخشی از «واقعیت» با هدف تخریب آن است؛ به گونه‌ای که بار معنایی حقیقت را جابه‌جا کنند. برای مثال، در برابر نقدهای مستند و عقلانی و مبتنی بر متن اصیل قرآن، ماشین پروپاگاندا به جای پاسخ به محتوا، با «ترور شخصیت» و «انگ‌زنی امنیتی»، نیت نویسنده را هدف می‌گیرد تا ذهن مخاطب را از «اصل واقعیت» منحرف کرده و حقیقت را در پوششی از مفاهیم منفی و ترس‌آور پنهان سازد. این همان «خدعه‌ی فقهی» است که در آن، شنیدن کلام حق، به عنوان یک توطئه‌ی باطل بازنمایی می‌شود.</p>
+        </div>
+        <div class="content-en">
+			<h2>Part Seven: A Note on Deception under the Guise of Truth</h2>
+
+				<p>Before presenting the final analysis and conclusion regarding the behavior of the custodians of this intellectual system, it must be noted that we are dealing here with the phenomenon of the "professional liar." The destructive power of this movement lies in the fact that they first believe their own lie (as a sacred truth) so that they can construct a coherent and deceptive "storyline" upon that foundation. One of the most sophisticated methods of trickery is stating a portion of "reality" with the explicit aim of destroying it; they do this by shifting the semantic weight of the truth. For example, when faced with documented, rational critiques based on the authentic text of the Quran, the propaganda machine—instead of addressing the content—resorts to "character assassination" and "security labeling." They target the author's intent to divert the audience's mind from the "core reality," hiding the truth under a shroud of negative and fear-inducing concepts. This is the essence of "jurisprudential deception," in which hearing the word of truth is misrepresented as a wicked conspiracy.</p>        </div>
     </section>
 
     <section id="conclusion" style="border: 2px solid var(--accent-color);">
-        <h2>بخش هشتم، نتیجه‌گیری:  بازگشت به یگانه منبعِ اصیل معرفت</h2>
-        <p> <strong> برخلافِ تمامِ بافته‌های فقهی که سعی در صغیر پنداشتنِ انسان دارند، باید با قاطعیت اعلام کرد که: یگانه منبعِ اصیل و خدشه‌ناپذیرِ معرفت، فقط و فقط «عقل» است. هر آنچه خارج از دایره‌ی خرد باشد، فاقدِ اصالت و اعتبار است. حتی مفاهیمی چون «نبوت» و «شهادتین»، تنها زمانی ارزشِ انسانی و الهی پیدا می‌کنند که بر بسترِ اختیارِ آگاهانه و سنجشِ عقلانی شکل گرفته باشند. پذیرشِ هر اصل یا فرعی از دین، برای انسانِ «لایعقل» (بی‌خرد) اساساً بی‌معناست؛ چرا که دین برای «انسان» است و مرزِ فاصلِ انسان و حیوان، چیزی جز قوه‌ی تمیز و خرد نیست.</strong></p>
-		
-		 <p><strong>برای روشن‌تر شدنِ این حقیقت، می‌توان از یک تمثیلِ ساده استفاده کرد: عقل همچون یک قطب‌نمای دقیق برای حرکت در مسیرِ زندگی است. اگر شما قصدِ سفر از تهران به رشت را داشته باشید، آیا حرکت کردن بر اساس جهت‌های موهومی، تصادفی یا پیروی کورکورانه از ادعایِ جهت‌یابیِ دیگری که خود راه را نمی‌شناسد، می‌تواند شما را به مقصد برساند؟ مسلماً خیر. همین منطق در مورد معرفت و راهبریِ جامعه نیز صادق است. بنابراین، عقل و خرد، یگانه مرجع معرفت هستند که اتفاقاً به شدت هم در متن اصیل قرآن به آن تأکید شده و انسان‌ها را به تفکر و تدبر فراخوانده است. </strong></p>
-		 
-		 <p><strong> منبعِ نهاییِ قضاوت و معرفت، «عقلِ خودِ شخص» است و نه اراده، تشخیص یا فتوایِ هیچ شخصِ دیگری (با هر عنوانی اعم از ولی، خلیفه، کفیل یا نایب). سپردنِ لگامِ عقل به دست دیگری، نفیِ انسانیت و بازگشت به سطحِ غریزی حیوانی است. توحیدِ واقعی در رهایی از زنجیرِ «قیومیتِ بشر بر بشر» و ایستادن بر قله‌ی خرد آزاد نهفته است. هر حکمی که با ترازویِ عقل سلیم بشری سازگار نباشد، نه از سویِ حق، بلکه برآمده از همان «موهومات» و «خدعه‌هایی» است که قرن‌هاست تمدن‌ها را در سیاهی نگاه داشته است.</strong></p>
-		  
-		
-		<div class="image-wrapper">
-            <img src="img/fig10.jpg" alt="خرد یگانه منبع اصیل معرفت که قطب نمای حرکت انسان آزاد است.">
-            <span class="image-caption">خرد یگانه منبع اصیل معرفت که قطب نمای حرکت انسان آزاد است. </span>
-        </div> 		
+        <div class="content-fa">
+			<h2>بخش هشتم، نتیجه‌گیری:  بازگشت به یگانه منبعِ اصیل معرفت</h2>
+				<p> <strong> برخلافِ تمامِ بافته‌های فقهی که سعی در صغیر پنداشتنِ انسان دارند، باید با قاطعیت اعلام کرد که: یگانه منبعِ اصیل و خدشه‌ناپذیرِ معرفت، فقط و فقط «عقل» است. هر آنچه خارج از دایره‌ی خرد باشد، فاقدِ اصالت و اعتبار است. حتی مفاهیمی چون «نبوت» و «شهادتین»، تنها زمانی ارزشِ انسانی و الهی پیدا می‌کنند که بر بسترِ اختیارِ آگاهانه و سنجشِ عقلانی شکل گرفته باشند. پذیرشِ هر اصل یا فرعی از دین، برای انسانِ «لایعقل» (بی‌خرد) اساساً بی‌معناست؛ چرا که دین برای «انسان» است و مرزِ فاصلِ انسان و حیوان، چیزی جز قوه‌ی تمیز و خرد نیست.</strong></p>
+				
+				 <p><strong>برای روشن‌تر شدنِ این حقیقت، می‌توان از یک تمثیلِ ساده استفاده کرد: عقل همچون یک قطب‌نمای دقیق برای حرکت در مسیرِ زندگی است. اگر شما قصدِ سفر از تهران به رشت را داشته باشید، آیا حرکت کردن بر اساس جهت‌های موهومی، تصادفی یا پیروی کورکورانه از ادعایِ جهت‌یابیِ دیگری که خود راه را نمی‌شناسد، می‌تواند شما را به مقصد برساند؟ مسلماً خیر. همین منطق در مورد معرفت و راهبریِ جامعه نیز صادق است. بنابراین، عقل و خرد، یگانه مرجع معرفت هستند که اتفاقاً به شدت هم در متن اصیل قرآن به آن تأکید شده و انسان‌ها را به تفکر و تدبر فراخوانده است. </strong></p>
+				 
+				 <p><strong> منبعِ نهاییِ قضاوت و معرفت، «عقلِ خودِ شخص» است و نه اراده، تشخیص یا فتوایِ هیچ شخصِ دیگری (با هر عنوانی اعم از ولی، خلیفه، کفیل یا نایب). سپردنِ لگامِ عقل به دست دیگری، نفیِ انسانیت و بازگشت به سطحِ غریزی حیوانی است. توحیدِ واقعی در رهایی از زنجیرِ «قیومیتِ بشر بر بشر» و ایستادن بر قله‌ی خرد آزاد نهفته است. هر حکمی که با ترازویِ عقل سلیم بشری سازگار نباشد، نه از سویِ حق، بلکه برآمده از همان «موهومات» و «خدعه‌هایی» است که قرن‌هاست تمدن‌ها را در سیاهی نگاه داشته است.</strong></p>
+				  
+				
+				<div class="image-wrapper">
+					<img src="img/fig10.jpg" alt="خرد یگانه منبع اصیل معرفت که قطب نمای حرکت انسان آزاد است.">
+					<span class="image-caption">خرد یگانه منبع اصیل معرفت که قطب نمای حرکت انسان آزاد است. </span>
+				</div> 		
 
-		
-		
-		
+		        </div>
+        <div class="content-en">
+			<h2>Part Eight, Conclusion: Returning to the Sole Authentic Source of Knowledge</h2>
+
+				<p><strong>Contrary to all jurisprudential fabrications that seek to regard humans as minors, it must be declared with absolute certainty: the sole authentic and unshakable source of knowledge is "Reason" and "Intellect" alone. Anything falling outside the circle of wisdom lacks authenticity and validity. Even concepts such as "Prophecy" or the "Shahada" (Profession of Faith) only acquire human and divine value when they are formed upon a foundation of conscious choice and rational assessment. The acceptance of any principle or branch of religion is fundamentally meaningless for an "irrational" (unwise) person; for religion is intended for the "human," and the dividing line between human and animal is nothing other than the power of discernment and wisdom.</strong></p>
+
+				<p><strong>To clarify this truth, one can employ a simple analogy: Reason is like a precise compass for navigating the path of life. If you intended to travel from Tehran to Rasht, could moving based on illusory or random directions—or blindly following the navigational claims of another who does not know the way themselves—ever lead you to your destination? Certainly not. This same logic applies to knowledge and the guidance of society. Therefore, intellect and wisdom are the sole references for knowledge; a fact that is, incidentally, emphasized intensely within the authentic text of the Quran, which repeatedly calls humanity to reflection and contemplation.</strong></p>
+
+				<p><strong>The ultimate source of judgment and knowledge is "one's own reason," not the will, discernment, or fatwa of any other person (under any title, whether Wali, Caliph, Custodian, or Deputy). Surrendering the reins of intellect to another is a denial of humanity and a regression to an instinctive, animalistic level. True monotheism lies in liberation from the chains of "human custodianship over humans" and standing upon the peak of free wisdom. Any decree that is incompatible with the scales of sound human reason does not originate from the Truth, but arises from those very "illusions" and "deceptions" that have kept civilizations in darkness for centuries.</strong></p>
+
+				<div class="image-wrapper">
+					<img src="img/fig10.jpg" alt="Reason is the sole authentic source of knowledge, the compass for the movement of the free human.">
+					<span class="image-caption">Reason is the sole authentic source of knowledge, serving as the compass for the movement of the free human.</span>
+				</div>        
+		</div>
+
     </section>
 
-
-
-<footer style="text-align: center; margin-top: 50px; padding: 40px; background-color: #f4f7f9; border-top: 1px solid #d1d9e0; font-size: 0.9rem; line-height: 1.6;">
-    <div style="margin-bottom: 15px;">
-        <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">
-            <img alt="Creative Commons License" style="border-width:0; margin-bottom: 10px;" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" />
-        </a>
-    </div>
-    
-    <p>
-        این اثر تحت لایسنس <strong>Creative Commons (Attribution-NonCommercial-NoDerivatives 4.0)</strong> منتشر شده است.
-    </p>
-    
-    <p style="color: #2c3e50; font-weight: bold;">
-        📢 ذکر و انتشار مطالب این مقاله تنها با شرط «عدم تحریف»، «ذکر نام نویسنده» و «ارجاع به منبع اصلی» آزاد است.
-    </p>
-
-    <p>
-        نسخه مرجع و سند اصالت این نوشتار در مخزن گیت‌هاب زیر قابل استعلام و راستی‌آزمایی است:<br>
-        <a href="https://github.com/SalarBasiri/in-praise-for-wisdom" target="_blank" style="color: #2980b9; text-decoration: none;">
-            github.com/SalarBasiri/in-praise-for-wisdom
-        </a>
-    </p>
-    
-    <p style="margin-top: 20px; font-size: 0.8rem; color: #888;">
-        © کليه حقوق معنوی این اثر متعلق به نویسنده بوده و هرگونه تحریف یا انتساب دروغین، مصداق نقض حقوق مالکیت فکری است.
-    </p>
-</footer>
-
-
-
+    <footer>
+        <div class="content-fa">
+            <p>© ۲۰۲۶ سالار بصیری. تمامی حقوق محفوظ است. منتشر شده تحت لایسنس CC BY-NC-ND 4.0</p>
+        </div>
+        <div class="content-en">
+            <p>© 2026 Salar Basiri. All rights reserved. Published under CC BY-NC-ND 4.0 license.</p>
+        </div>
+    </footer>
 </div>
 
-
 <script>
-let slideIndex = 1;
-showSlides(slideIndex);
+    function setLanguage(lang) {
+        const htmlTag = document.getElementById('main-html');
+        const btnFa = document.getElementById('btn-fa');
+        const btnEn = document.getElementById('btn-en');
+        
+        htmlTag.setAttribute('lang', lang);
+        htmlTag.setAttribute('dir', lang === 'fa' ? 'rtl' : 'ltr');
 
-// کنترل دکمه‌های بعدی و قبلی
-function plusSlides(n) {
-    showSlides(slideIndex += n);
-}
-
-function showSlides(n) {
-    let i;
-    let slides = document.getElementsByClassName("slides");
-    if (n > slides.length) {slideIndex = 1}    
-    if (n < 1) {slideIndex = slides.length}
-    for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";  
+        if (lang === 'fa') {
+            btnFa.classList.add('active');
+            btnEn.classList.remove('active');
+        } else {
+            btnEn.classList.add('active');
+            btnFa.classList.remove('active');
+        }
     }
-    slides[slideIndex-1].style.display = "block";  
-}
 </script>
 
 </body>
