@@ -165,15 +165,15 @@
         </div>
     </header>
 
-    <div class="download-btn-container">
-        <a href="img/InPraiseForWisdom.pdf" class="pdf-download-btn" download>
-            <span class="content-fa">دانلود نسخه PDF مقاله</span>
-            <span class="content-en">Download PDF Version</span>
-            <svg style="margin: 0 10px;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white">
-                <path d="M11.363 2c4.155 0 2.637 6 2.637 6s6-1.45 6 2.457v11.543h-16v-20h7.363zm.826-2h-10.189v24h20v-14.366l-9.811-9.634zm4.811 13h-10v-1h10v1zm0 2h-10v-1h10v1zm0 2h-10v-1h10v1z"/>
-            </svg>
-        </a>
-    </div>
+		<div class="download-btn-container">
+			<a href="img/InPraiseForWisdom.pdf" id="pdf-link" class="pdf-download-btn" download>
+				<span class="content-fa">دانلود نسخه PDF مقاله</span>
+				<span class="content-en">Download PDF Version</span>
+				<svg style="margin: 0 10px;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white">
+					<path d="M11.363 2c4.155 0 2.637 6 2.637 6s6-1.45 6 2.457v11.543h-16v-20h7.363zm.826-2h-10.189v24h20v-14.366l-9.811-9.634zm4.811 13h-10v-1h10v1zm0 2h-10v-1h10v1zm0 2h-10v-1h10v1z"/>
+				</svg>
+			</a>
+		</div>
 
     <section id="intro">
         <div class="content-fa">
@@ -529,16 +529,21 @@
         const htmlTag = document.getElementById('main-html');
         const btnFa = document.getElementById('btn-fa');
         const btnEn = document.getElementById('btn-en');
+        const pdfLink = document.getElementById('pdf-link');
         
+        // Change page language and direction
         htmlTag.setAttribute('lang', lang);
         htmlTag.setAttribute('dir', lang === 'fa' ? 'rtl' : 'ltr');
 
+        // Toggle Active Button Styles and PDF Link
         if (lang === 'fa') {
             btnFa.classList.add('active');
             btnEn.classList.remove('active');
+            pdfLink.setAttribute('href', 'img/InPraiseForWisdom.pdf');
         } else {
             btnEn.classList.add('active');
             btnFa.classList.remove('active');
+            pdfLink.setAttribute('href', 'img/InPraiseForWisdomEN.pdf');
         }
     }
 </script>
