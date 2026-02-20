@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hikmete Övgü - Salar Basiri</title>
     <style>
+	@media print {
+    h2, h3 { page-break-after: avoid; }
+    .image-wrapper { page-break-inside: avoid; }
+    section { page-break-inside: auto; }
+    a { text-decoration: none; color: black; }
+	}
         /* استایل‌های پایه و فونت */
         :root {
             --primary-color: #2c3e50;
@@ -432,7 +438,11 @@
 
 	<footer>
         <div class="content-tr">
-            <p>© 2026 Salar Basiri. Tüm hakları saklıdır. CC BY-NC-ND 4.0 lisansı kapsamında yayımlanmıştır.</p>
+            <p>© 2026 Salar Basiri. Tüm hakları saklıdır. CC BY-NC-ND 4.0 lisansı altında yayımlanmıştır.</p>
+            <p style="font-size: 0.85em; opacity: 0.8;">
+                Not: Makalenin aslı Farsçadır ve İngilizce sürüm yazar tarafından incelenip onaylanmıştır. 
+                Diğer dillere çeviri Google Gemini aracılığıyla sağlanmıştır.
+            </p>
         </div>
     </footer>
 

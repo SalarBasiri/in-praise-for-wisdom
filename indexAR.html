@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>في مديح الحكمة - سالار بصيري</title>
     <style>
+	@media print {
+    h2, h3 { page-break-after: avoid; }
+    .image-wrapper { page-break-inside: avoid; }
+    section { page-break-inside: auto; }
+    a { text-decoration: none; color: black; }
+	}
         /* استایل‌های پایه و فونت */
         :root {
             --primary-color: #2c3e50;
@@ -430,9 +436,13 @@
 
 
 
-	<footer>
+	<footer dir="rtl">
         <div class="content-ar">
-            <p>© ٢٠٢٦ سالار بصيري. جميع الحقوق محفوظة. نُشر بموجب رخصة المشاع الإبداعي (CC BY-NC-ND 4.0).</p>
+            <p>© 2026 سالار بصيري. جميع الحقوق محفوظة. نُشر بموجب رخصة CC BY-NC-ND 4.0.</p>
+            <p style="font-size: 0.85em; opacity: 0.8;">
+                ملاحظة: المقال الأصلي باللغة الفارسية والنسخة الإنجليزية تمت مراجعتها واعتمادها من قبل المؤلف. 
+                تمت تسهیل الترجمة إلى اللغات الأخرى بواسطة Google Gemini.
+            </p>
         </div>
     </footer>
 

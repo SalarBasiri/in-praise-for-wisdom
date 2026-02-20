@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elogio de la Sabiduría - Salar Basiri</title>
+    <style>
+	@media print {
+    h2, h3 { page-break-after: avoid; }
+    .image-wrapper { page-break-inside: avoid; }
+    section { page-break-inside: auto; }
+    a { text-decoration: none; color: black; }
+	}
+        /* استایل‌های پایه و فونت */
+        :root {
+            --primary-color: #2c3e50;
+            --text-color: #333;
+            --bg-color: #f9f9f9;
+            --card-bg: #ffffff;
+            --accent-color: #e67e22;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* کانتینر اصلی */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* هدر مقاله */
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 30px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        .meta {
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        /* بخش‌های مقاله */
+        section {
+            background: var(--card-bg);
+            padding: 30px;
+            margin-bottom: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+        }
+
+        h2 {
+            color: var(--accent-color);
+            border-right: 5px solid var(--accent-color);
+            padding-right: 15px;
+            margin-top: 0;
+            font-size: 1.6rem;
+        }
+
+        p {
+            font-size: 1.1rem;
+            text-align: justify;
+        }
+
+        /* استایل تصاویر */
+        .image-wrapper {
+            margin: 25px 0;
+            text-align: center;
+        }
+
+        .image-wrapper img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .image-caption {
+            display: block;
+            font-size: 0.85rem;
+            color: #888;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        /* نقل قول‌ها (برای آیات یا جملات خاص) */
+        blockquote {
+            background: #fff3e0;
+            border-right: 10px solid #ffb74d;
+            margin: 20px 0;
+            padding: 20px;
+            font-style: italic;
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* فوتر */
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px;
+            color: #888;
+            border-top: 1px solid #eee;
+        }
+
+        /* واکنش‌گرایی برای موبایل */
+        @media (max-width: 600px) {
+            h1 { font-size: 1.8rem; }
+            section { padding: 20px; }
+            .container { padding: 20px 15px; }
+        }
+		
+		/* استایل اسلایدر */
+		.slider-container {
+			position: relative;
+			max-width: 100%;
+			margin: 20px auto;
+			overflow: hidden;
+			border-radius: 12px;
+			box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+		}
+
+		.slides {
+			display: none; /* در ابتدا همه مخفی هستند */
+		}
+
+		.slides img {
+			width: 100%;
+			height: auto;
+			display: block;
+		}
+
+		/* دکمه‌های ناوبری */
+		.prev, .next {
+			cursor: pointer;
+			position: absolute;
+			top: 50%;
+			width: auto;
+			padding: 16px;
+			margin-top: -22px;
+			color: white;
+			font-weight: bold;
+			font-size: 20px;
+			transition: 0.6s ease;
+			border-radius: 0 3px 3px 0;
+			user-select: none;
+			background-color: rgba(0,0,0,0.3);
+			text-decoration: none;
+		}
+
+		.next {
+			left: 0;
+			border-radius: 3px 0 0 3px;
+		}
+
+		.prev {
+			right: 0;
+			border-radius: 0 3px 3px 0;
+		}
+
+		.prev:hover, .next:hover {
+			background-color: rgba(0,0,0,0.8);
+		}
+
+		/* انیمیشن محو شدن */
+		.fade {
+			animation-name: fade;
+			animation-duration: 1.5s;
+		}
+
+		@keyframes fade {
+			from {opacity: .4} 
+			to {opacity: 1}
+		}
+		
+		
+		.download-btn-container {
+			text-align: center;
+			margin: 20px 0 40px 0;
+		}
+
+		.pdf-download-btn {
+			display: inline-flex;
+			align-items: center;
+			background-color: #2980b9; /* رنگ آبی خرد */
+			color: white;
+			padding: 12px 25px;
+			text-decoration: none;
+			border-radius: 50px;
+			font-weight: bold;
+			transition: all 0.3s ease;
+			box-shadow: 0 4px 10px rgba(41, 128, 185, 0.3);
+		}
+
+		.pdf-download-btn:hover {
+			background-color: #1a5276; /* آبی تیره تر برای حالت هاور */
+			transform: translateY(-2px);
+			box-shadow: 0 6px 15px rgba(41, 128, 185, 0.4);
+		}
+
+		.pdf-download-btn svg {
+			margin-left: 10px;
+			fill: white;
+		}
+		
+    </style>
+	
+	<meta name="description" content="Una exploración analítica del racionalismo, el libre pensamiento y la síntesis de la razón moderna con el discurso teológico en la búsqueda de la justicia y la verdad.">
+    <meta name="keywords" content="Racionalismo, Elogio de la Sabiduría, Libre Pensamiento, Libertad Intelectual, Racionalidad Moderna, Crítica Jurisprudencial, Epistemología, Brújula de la Razón, Sabiduría Individual">
+    <meta name="author" content="Salar Basiri">
+
+    <meta property="og:title" content="Elogio de la Sabiduría: Regreso a la Única Fuente Auténtica del Conocimiento">
+    <meta property="og:description" content="Un análisis crítico sobre la soberanía de la razón individual y la liberación de las falacias dogmáticas para alcanzar una justicia genuina.">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="img/fig10.jpg">
+
+</head>
+<body>
+
+<div class="container">
+	<header>
+        <h1>Elogio de la Sabiduría</h1>
+        <div class="meta">Salar Basiri</div>
+        <div class="meta">1 de enero de 2026, Teherán, Irán</div>
+    </header>
+	
+    <div class="download-btn-container">
+    <a href="img/InPraiseForWisdomES.pdf" class="pdf-download-btn" download>
+        <span>Descargar PDF</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+            <path d="M11.363 2c4.155 0 2.637 6 2.637 6s6-1.45 6 2.457v11.543h-16v-20h7.363zm.826-2h-10.189v24h20v-14.366l-9.811-9.634zm4.811 13h-10v-1h10v1zm0 2h-10v-1h10v1zm0 2h-10v-1h10v1z"/>
+        </svg>
+    </a>
+    </div>
+
+    <section id="intro">
+        <h2>Introducción</h2>
+            <p>A lo largo de millones de años de expansión de la vida en la Tierra, el surgimiento del "Homo sapiens" se erige como la cúspide de esta narrativa: el punto donde la conciencia y el poder del pensamiento trascienden los reinos de la materia y la energía. Al dominar las leyes de la naturaleza, la humanidad se volvió capaz de imaginar, fabricar herramientas e innovar, manifestando así una chispa de poder creativo.</p>
+
+            <p>Todo esto sería inconcebible sin la "Sabiduría". En este contexto, el papel del "Lenguaje" es innegable; el habla no es meramente un medio de comunicación, sino una herramienta para compartir experiencias. Sin el lenguaje, la conciencia humana individual nunca habría evolucionado hacia una "superconciencia" colectiva con el tiempo; ninguna civilización habría tomado forma y no se habría producido ningún cambio significativo en la trayectoria de la vida humana.</p>
+
+            <p>En los relatos de la creación, se cuenta que cuando Dios creó al hombre, Satanás se negó a postrarse, percibiéndose a sí mismo como hecho de fuego y al hombre de barro. Sin embargo, al examinar a esta criatura, descubrió un secreto: la característica más definitoria del hombre es la "Sabiduría" y su capacidad de pensamiento. Fue a partir de esta comprensión que comenzó el juramento de Satanás de extraviar a la humanidad; entendió que solo "extinguiendo la sabiduría" podría desviar al hombre de su camino auténtico.</p>
+
+            <p>Basándose en este vínculo inseparable entre pensamiento y lenguaje, el objetivo de este escrito es emplear las herramientas del discurso y el diálogo para redescubrir y propagar la "Sabiduría Pura". Esto sirve como introducción a una serie de artículos titulados "Elogio de la Sabiduría", una colección en la que me esforzaré, basándome en el texto coránico y en metodologías científicas razonadas, por reexaminar la distinción fundamental entre los seres humanos y otras criaturas. En este viaje, exploraremos las falacias antiguas y los desafíos intelectuales contemporáneos que obstruyen el camino de la sabiduría; pues creo que la clave para desatar los nudos de hoy reside en volver al pensamiento libre, alejado del dogmatismo.</p>
+
+        <div class="image-wrapper">
+            <img src="img/fig1.jpg" alt="Énfasis en el pensamiento y el razonamiento">
+            <span class="image-caption">Énfasis en el pensamiento y el razonamiento</span>
+        </div>
+    </section>
+	
+	<section id="section1">
+			<h2>Primera parte: Las leyes de la naturaleza y la voluntad humana; el único terreno común</h2>
+
+				<p>Una de las falacias más significativas que encadena la sabiduría humana es la delegación de toda responsabilidad a fuerzas metafísicas y el consecuente desprecio por el papel de la "acción" y la "ley". Para escapar de este estancamiento intelectual, debemos alcanzar un consenso sobre un principio universal que sirva como base para todo discurso racional: el mundo se rige por las "leyes inmutables de la naturaleza" y el "libre albedrío y la agencia del hombre".</p>
+
+				<p>Este es un principio objetivo. La aceptación del libre albedrío es la piedra angular de todo sistema legal y moral en el mundo. Sin libre albedrío, ni el crimen ni el castigo tienen sentido; ningún asesino podría ser condenado y ningún héroe podría ser elogiado. Incluso cuando nos enfrentamos al dominio de un tirano, estos dos principios no se violan; más bien, somos testigos del abuso del "libre albedrío" de un ser humano y de la explotación de las herramientas del poder (basadas en leyes naturales), no de un destino inevitable o celestial.</p>
+
+				<p>La divergencia de perspectivas radica únicamente en la interpretación del origen de estos dos principios:</p>
+
+				<p>1. Los verdaderos monoteístas creen que estas leyes y este poder de libre albedrío fueron diseñados y delegados a la humanidad por un único Creador.</p>
+
+				<p>2. Los no creyentes los consideran el resultado de procesos materiales y evolutivos.</p>
+
+				<p>3. Los adoradores de la superstición, sin embargo, al atribuir cada evento a voluntades personalizadas que existen fuera de la legalidad de la naturaleza, insultan la santidad de la sabiduría y obstruyen el camino hacia la responsabilidad humana.</p>
+
+				<p>"¡Dios no está preocupado por tales detalles!" Esta declaración no es una negación del Creador; más bien, es una exaltación de la Ley establecida para que el mundo gire sobre el eje del libre albedrío delegado a la humanidad sabia. En este marco, cuando el hombre reconoce las leyes de la naturaleza y las emplea para una vida mejor, es la esencia misma de la "Justicia".</p>
+
+				<p>En un mundo basado en el conocimiento, la aceptación de estos dos principios nos libera de la espera de milagros o del miedo a la superstición. No somos víctimas del destino sin elección, sino observadores y actores racionales que deben forjar su propio destino con libre albedrío a través de la comprensión de las leyes de la existencia.</p>        
+        
+		<div class="image-wrapper">
+            <img src="img/fig2.jpg" alt="Énfasis en las leyes naturales y la razón humana">
+            <span class="image-caption">Énfasis en las leyes naturales y la razón humana</span>
+        </div>
+    </section>
+	
+	
+
+	<section id="section2">
+			<h2>Segunda parte: Transición de la "Persona Sagrada" hacia el "Principio Sagrado"</h2>
+
+				<p>La misión más fundamental del racionalismo en el camino del monoteísmo es el desmantelamiento de los "cultos a la personalidad" y su sustitución por la soberanía del "Principio Sagrado" o la "Verdad". La mayor falacia que aprisiona a las civilizaciones es el regreso a la era de la idolatría bajo un nuevo ropaje: un estado en el que un "ser humano" es sustituido por la "Verdad".</p>
+
+				<p><strong>Del Antropomorfismo al Angelismo</strong></p>
+
+				<p>Las mentes que evitan la razón son incapaces de comprender conceptos abstractos y tienden a encarnar el derecho y la justicia dentro del marco de un ídolo humano (Antropomorfismo). Los movimientos totalitarios explotan esta debilidad creando una forma de "angelización" en torno a ciertas personalidades para elevarlas a un estatus de "infalibilidad absoluta". El objetivo de esta falacia es situar a la persona más allá de toda crítica. Una vez que se asume que un individuo es infalible, cualquier crítica hacia él se considera "blasfemia", sellando así las puertas de la sabiduría.</p>
+
+				<p><strong>Sabiduría: El Mensajero Interno frente al encarcelamiento del intelecto</strong></p>
+
+				<p>En la visión racionalista, se hace referencia a la "Razón" como el Mensajero Interno; así como los profetas son mensajeros externos, la sabiduría es el enviado de Dios dentro de cada ser humano. Por consiguiente, el enfoque auténtico debe permanecer en la agencia y la voluntad del individuo racional y sabio. Confinar el intelecto dentro de la voluntad de una sola persona —bajo cualquier título, ya sea Walí, Califa o Custodio— es, en verdad, una negación de este Mensajero Interno y la suspensión del Legado Divino otorgado a cada individuo.</p>
+
+				<p><strong>La confrontación entre libertad y despotismo: del orden de cuartel a la cautividad religiosa</strong></p>
+
+				<p>Al diseccionar conceptos como la Tutela Absoluta (Wilayat), el Califato y la Custodia humana, llegamos a una verdad desnuda: en realidad, no son más que un "orden de cuartel" promovido por estructuras militares y semimilitares. En un cuartel, la "obediencia ciega" es la virtud más alta; sin embargo, en un sistema racional centrado en la Verdad, el "libre albedrío" y la "libertad" son los fundamentos mismos de la creación humana.</p>
+
+				<p><strong>El patrón perpetuo del Faraón: Propiedad de la vida y los bienes.</strong> Cualquier forma de gobierno que imponga su voluntad personal sobre el pueblo es, de hecho, una reproducción del modelo del "Faraón". Faraón también presidía un gobierno religioso; no era meramente un gobernante político, sino que reclamaba un estatus sagrado, instando al pueblo a adorarlo y afirmando la propiedad sobre las vidas, los bienes e incluso el destino de los israelitas. Esta es precisamente la pretensión que se hace hoy bajo el nombre de "Wilayat al-Faqih": una reclamación de propiedad sobre los destinos nacionales bajo la cobertura de una Diputación Divina.</p>
+
+				<p><strong>El engaño de adquirir autoridad de lo Sagrado:</strong> La historia demuestra que este ha sido el método perenne de los regímenes totalitarios: utilizar lo que es comúnmente aceptado por las masas para adquirir "autoridad" (authoritas). En este proceso, no importa si una sociedad es supersticiosa, vulnerable o incluso monoteísta; el gobernante despótico construye una escalera hacia un estatus divino utilizando cualquier cosa en la que el pueblo "crea". Este acto, independientemente del valor inherente de esa creencia, es un caso claro de "engaño y abuso".</p>
+
+				<p><strong>Moisés (PBUH): El pionero de la liberación y la libertad.</strong> Bajo esta visión, el Profeta Moisés (PBUH) debe ser considerado como uno de los grandes pioneros de la libertad. Su misión no fue meramente religiosa, sino un movimiento de liberación para romper las cadenas de la "Custodia del Faraón" sobre la humanidad. Se levantó para liberar al hombre de la servidumbre del hombre y conducirlo hacia la "verdad sin mediación" y la sabiduría libre.</p>
+
+				<p><strong>Shirk (Politeísmo) bajo el manto de la religión:</strong> Los defensores de estos sistemas de estilo cuartelario a menudo acusan a los críticos de "blasfemia", pero en realidad, ellos mismos representan la forma definitiva de Shirk; pues han sentado a un humano falible en la posición sagrada de Dios y han reemplazado la verdad absoluta por su voluntad personal. Arrebatan las "balanzas de la sabiduría" a la nación para ser ellos los únicos que sirvan como balanza para el bien y el mal.</p>        
+	</section>
+	
+	
+	
+	<section id="section3">
+            <h2>Parte tres: El monoteísmo como liberación; negación de todo intermediario sagrado</h2>
+				<p>Al describir la gloria de la Verdad, el Corán enfatiza que la santidad le pertenece únicamente a Él (Al-Hashr: 23) y desmantela la institución de la mediación:</p>
+
+				<div class="image-wrapper">
+					<img src="img/fig4.jpg" alt="Énfasis en los atributos de Dios en la perspectiva monoteísta de las religiones abrahámicas">
+					<span class="image-caption">Énfasis en los atributos de Dios en la perspectiva monoteísta de las religiones abrahámicas</span>
+				</div>
+
+				<p><strong>Negación de toda tutela que no sea Dios: "...Y no tenéis, fuera de Alá, ni protector ni auxiliador." (Al-Baqarah: 107)</strong></p>
+
+				<div class="image-wrapper">
+					<img src="img/fig3.jpg" alt="Énfasis en que no hay más protector ni auxiliador que Dios">
+					<span class="image-caption">Énfasis en que no hay más protector ni auxiliador que Dios</span>
+				</div>
+
+				<p><strong>Negation de la intercesión y la mediación: "No tienen, fuera de Él, ni protector ni intercesor..." (Al-An'am: 51)</strong></p>
+
+				<div class="image-wrapper">
+					<img src="img/fig5.jpg" alt="Negación de la intercesión y la mediación">
+					<span class="image-caption">Negación de la intercesión y la mediación</span>
+				</div>		
+
+				<p><strong>Por lo tanto, el monoteísmo implica que ningún ser humano, en ninguna capacidad, es un intermediario obligatorio entre la sabiduría y la verdad. Los sistemas basados en la "tutela" humana (Wilayah), al transformar a una "persona" en una entidad sagrada, han regresado a las prácticas del chamanismo y el faraonismo. El regreso a la sabiduría depende de trascender esta idolatría y reclamar el "libre albedrío".</strong></p>        
+    </section>
+	
+	<section id="section4">
+			<h2>Parte cuatro: El rechazo de la razón en la falacia de negar el "Tiempo y el Lugar"</h2>
+
+				<p>El primer golpe, y el más fatal, que el pensamiento jurisprudencial (Fiqhi) propina al cuerpo de la sabiduría pura es el desprecio intencionado por los elementos de "tiempo y lugar". Con una persistencia peculiar, los juristas intentan imponer los patrones biológicos y de subsistencia de la Península Arábiga de hace 1400 años como un esquema eterno para gobernar la compleja sociedad del Irán del siglo XXI. Este enfoque no es un simple error, sino una falacia fundamental; pues incluso asumiendo que las figuras históricas de la era del Profeta fueran personalidades relativamente positivas, transformar comportamientos y discursos adecuados a la "Ignorancia Hijazi" en la base legal de una nación en la era de la tecnología sigue siendo una negación explícita de la racionalidad humana. De hecho, las virtudes individuales de una figura en el corazón de la historia nunca sirven de licencia para transformar sus preferencias y edictos temporales en "leyes inmutables" para las eras posteriores.</p>
+
+				<p>Se debe reconocer la verdad histórica de que el surgimiento de cualquier escuela de pensamiento dentro del contexto de la historia fue un "proceso": una progresión adaptada a las capacidades de esa era específica. La noción de que, con la llegada de una fe, las sociedades fueron repentinamente cortadas de todo vínculo temporal y alcanzaron la perfección absoluta es una ilusión vana. Por lo tanto, ¿por qué el estilo de vida de los predecesores —que, dicho sea de paso, no mostraba signos de una sociedad utópica— debería servir de base para gobernar una sociedad moderna?</p>
+
+				<p>La discusión sobre "las exigencias del tiempo y el lugar" no se limita a un periodo específico; ya sea hace 3500 años en la era cananea, hace 2500 años en la antigüedad o hace 1400 años, la humanidad siempre ha estado enredada en las limitaciones cognitivas e instrumentales de su época, y estos métodos no pueden extenderse al mundo contemporáneo.</p>
+
+				<div class="image-wrapper">
+					<img src="img/fig6.jpg" alt="Énfasis coránico en la adecuación de las condiciones de tiempo y lugar y la abrogación de versículos">
+					<span class="image-caption">Énfasis coránico en la adecuación de las condiciones de tiempo y lugar y la abrogación de versículos</span>
+				</div>
+
+				<p>En verdad, antes de los siglos XVII y XVIII, debido a la sencillez de las estructuras sociales y a las poblaciones limitadas, el modelo de "sacralizar a un individuo" pudo haber funcionado como una solución para mantener un orden tribal frágil. Sin embargo, con el desarrollo de las sociedades —y particularmente con la expansión sin precedentes de la población— ya no es posible que una sola "persona" gestione una sociedad entera con todas sus complejidades. De hecho, el estancamiento de las civilizaciones a lo largo de la historia se origina precisamente en este punto: el encarcelamiento del potencial infinito de la sabiduría colectiva dentro de la estrecha jaula de la voluntad y el discernimiento de un solo individuo.</p>
+    </section>
+
+	<section id="section5">
+			<h2>Parte cinco: La jurisprudencia de la ilusión; soberanía de los "mitos" sobre los destinos nacionales</h2>
+
+				<p>Al diseccionar el panorama legal actual de Irán con mayor precisión, llegamos a una verdad aterradora: este sistema legal no está construido sobre los cimientos de la sabiduría, sino sobre un "constructo ilusorio". Parece que los custodios de esta mentalidad, al no ver camino para reclamar una profecía real para sí mismos, fabricaron un "personaje mítico" tras el velo de la Ocultación. Al hacerlo, se aseguraron una renta sagrada para sí mismos de modo que, en su ausencia, pudieran retratar su "voluntad personal" como ley bajo el nombre de "Diputación" (Niabat).</p>
+
+				<p>Este es precisamente el callejón sin salida intelectual contra el que el Corán advierte repetidamente. Como afirma:</p>
+
+				<div class="image-wrapper">
+					<img src="img/fig7.jpg" alt="Referencia coránica a quienes siguen ilusiones">
+					<span class="image-caption">Referencia coránica a la adoración de ilusiones y mitos.</span>
+				</div> 
+
+				<p>Los líderes de esta ideología, al sustituir la "verdad objetiva" por "ilusiones verbales", han colocado a la sociedad en un estado en el que el delirio de una persona se impone a la sabiduría de toda una nación. Aquí se manifiestan los rastros de la advertencia coránica respecto a la influencia satánica —encubierta con el ropaje de la santidad y las "palabras decoradas"—:</p>
+
+				<div class="image-wrapper">
+					<img src="img/fig8.jpg" alt="Referencia coránica al discurso decorado">
+					<span class="image-caption">Referencia a la adoración de ilusiones y mitos como se menciona en el Corán.</span>
+				</div> 
+
+				<p>Este "Zukhruf al-Qawl" (Discurso Dorado) o palabras decoradas consiste en esas mismas justificaciones jurisprudenciales que intentan imponer a la fuerza un asunto ilusorio e ahistórico al pueblo como el "principio más sagrado de la constitución". Cuando los derechos de un país se extraen del reino de la "razón colectiva" y se transfieren al reino de los "delirios individuales", el resultado no es otro que la "regurgitación del despotismo medieval" en el corazón de la era moderna. De hecho, este no es un sistema divino, sino una forma de "Chamanismo Jurídico", donde un grupo reclama una conexión con un ser mítico para dominar las vidas, la propiedad y la libertad de los seres humanos a través de esta misma ilusión.</p>
+    </section>
+
+	<section id="section6">
+			<h2>Parte seis: De la justicia moderna a la opresión pseudo-sagrada</h2>
+
+				<p>Con este análisis, la raíz de la antigua enemistad de los juristas hacia la "razón calculadora moderna" resulta claramente evidente. La razón moderna, equipada con las herramientas de la crítica y la revisión de evidencias, desafía cualquier afirmación que carezca de sustento empírico. En consecuencia, los únicos compradores del pensamiento jurisprudencial existente son aquellos que sufren de facultades cognitivas debilitadas o que han perdido el poder de distinguir entre la "realidad" y la "ilusión" debido a los efectos de un adoctrinamiento similar a un sedante. De hecho, este sistema legal solo prospera en una atmósfera donde la sabiduría está suspendida y la "sedación mental" ha reemplazado al "análisis objetivo".</p>
+
+				<p>Aquí, se debe señalar la gran falacia respecto al concepto de "Justicia". La justicia no es un conjunto de instrucciones descendidas de un cielo de ilusiones, sino un concepto humano moderno inventado por la humanidad para mantener la estabilidad social y garantizar la coexistencia pacífica. Un vistazo al mundo contemporáneo demuestra esta verdad:</p>
+
+				<p>En los países que han aceptado la justicia como un contrato social basado en los derechos humanos, observamos que se ha alcanzado una justicia relativa a la luz de la libertad; pues allí, la ley es producto de la sabiduría colectiva y no de la voluntad de un ser mítico y su delegado. Por el contrario, en países como Irán que pretenden haber alcanzado una "Justicia Sagrada", lo que se observa en la práctica no es más que una profunda opresión, discriminación e injusticia estructural.</p>
+
+				<div class="image-wrapper">
+					<img src="img/fig9.jpg" alt="Énfasis en los medios terrenales de medición para establecer la justicia">
+					<span class="image-caption">Énfasis en los medios y medidas terrenales para el establecimiento de la justicia.</span>
+				</div> 		
+
+				<p>La pretensión de una justicia sagrada es simplemente una tapadera para escapar de la rendición de cuentas; pues cuando la justicia se transforma en algo "metafísico" y "representativo", ya no puede medirse con la vara de la razón humana, y el camino queda despejado para que se cometa cualquier crimen bajo un nombre sagrado. La amarga verdad es que entre la "ilusión de justicia divina de los juristas" y la "justicia humana real", existe un abismo tan profundo como la totalidad de la Edad Media.</p>
+
+				<p>Otro punto respecto a la realidad objetiva y simultáneamente impactante de esta sedación mental es el doble enfoque hacia la "intoxicación" en Irán. La feroz oposición al alcohol (que suele ser un símbolo de alegría social y alerta crítica) junto con la tolerancia —e incluso el acompañamiento y fomento— de narcóticos que llevan la mente hacia la pasividad, el letargo y la fantasía, no es una coincidencia.</p>
+
+				<p>Este enfoque es una reproducción del antiguo patrón "chamanístico", donde el uso de sustancias psicoactivas y narcóticos servía como herramienta para crear la ilusión de "intuición" y la pretensión de "comunicación con el ausente mítico". Cuando la mente, a través de la sedación (ya sea física o ideológica), se distancia de la realidad objetiva, la aceptación de "seres ilusorios" y "leyes trans-temporales" se vuelve más fácil. En verdad, la expansión de los salones de narguile y los aditivos desconocidos en ellos sirven como metáfora de ese mismo Fiqh que, al deshabilitar las facultades críticas del intelecto, sumerge a la sociedad en un profundo sueño medieval para que nadie pregunte: "¿Cómo ha reemplazado la voluntad de una persona ausente a la sabiduría viva de millones de seres humanos?"</p>
+    </section>
+
+    <section id="section7">
+ 			<h2>Part Seven: A Note on Deception under the Guise of Truth</h2>
+
+				<p>Before presenting the final analysis and conclusion regarding the behavior of the custodians of this intellectual system, it must be noted that we are dealing here with the phenomenon of the "professional liar." The destructive power of this movement lies in the fact that they first believe their own lie (as a sacred truth) so that they can construct a coherent and deceptive "storyline" upon that foundation. One of the most sophisticated methods of trickery is stating a portion of "reality" with the explicit aim of destroying it; they do this by shifting the semantic weight of the truth. For example, when faced with documented, rational critiques based on the authentic text of the Quran, the propaganda machine—instead of addressing the content—resorts to "character assassination" and "security labeling." They target the author's intent to divert the audience's mind from the "core reality," hiding the truth under a shroud of negative and fear-inducing concepts. This is the essence of "jurisprudential deception," in which hearing the word of truth is misrepresented as a wicked conspiracy.</p>        
+    </section>
+
+	<section id="conclusion" style="border: 2px solid var(--accent-color);">
+			<h2>Parte ocho, Conclusión: Regreso a la única fuente auténtica del conocimiento</h2>
+
+				<p><strong>Contrariamente a todas las fabricaciones jurisprudenciales que pretenden considerar a los seres humanos como menores de edad, debe declararse con absoluta certeza: la única fuente auténtica e inquebrantable de conocimiento es únicamente la "Razón" y el "Intelecto". Cualquier cosa que quede fuera del círculo de la sabiduría carece de autenticidad y validez. Incluso conceptos como la "Profecía" o la "Shahada" (Profesión de Fe) solo adquieren valor humano y divino cuando se forman sobre una base de elección consciente y evaluación racional. La aceptación de cualquier principio o rama de la religión carece fundamentalmente de sentido para una persona "irracional" (no sabia); pues la religión está destinada al "humano", y la línea divisoria entre el humano y el animal no es otra que el poder del discernimiento y la sabiduría.</strong></p>
+
+				<p><strong>Para esclarecer esta verdad, se puede emplear una analogía sencilla: la Razón es como una brújula precisa para navegar por el camino de la vida. Si tuviera la intención de viajar de Teherán a Rasht, ¿podría el hecho de moverse basándose en direcciones ilusorias o aleatorias —o seguir ciegamente las pretensiones de navegación de otro que no conoce el camino por sí mismo— llevarle alguna vez a su destino? Ciertamente no. Esta misma lógica se aplica al conocimiento y a la guía de la sociedad. Por lo tanto, el intelecto y la sabiduría son las únicas referencias para el conocimiento; un hecho que, por cierto, se enfatiza intensamente en el texto auténtico del Corán, que llama repetidamente a la humanidad a la reflexión y la contemplación.</strong></p>
+
+				<p><strong>La fuente última de juicio y conocimiento es "la propia razón", no la voluntad, el discernimiento o la fatwa de cualquier otra persona (bajo cualquier título, ya sea Walí, Califa, Custodio o Delegado). Entregar las riendas del intelecto a otro es una negación de la humanidad y una regresión a un nivel instintivo y animal. El verdadero monoteísmo reside en la liberación de las cadenas de la "custodia humana sobre los humanos" y en situarse en la cima de la sabiduría libre. Cualquier decreto que sea incompatible con las balanzas de la sana razón humana no se origina en la Verdad, sino que surge de esas mismas "ilusiones" y "engaños" que han mantenido a las civilizaciones en la oscuridad durante siglos.</strong></p>
+
+				<div class="image-wrapper">
+					<img src="img/fig10.jpg" alt="La razón es la única fuente auténtica de conocimiento, la brújula para el movimiento del humano libre.">
+					<span class="image-caption">La razón es la única fuente auténtica de conocimiento, sirviendo como la brújula para el movimiento del humano libre.</span>
+				</div>        
+    </section>
+
+
+
+	<footer>
+        <div class="content-es">
+            <p>© 2026 Salar Basiri. Todos los derechos reservados. Publicado bajo la licencia CC BY-NC-ND 4.0.</p>
+            <p style="font-size: 0.85em; opacity: 0.8;">
+                Nota: El artículo original está en persa y la versión en inglés ha sido revisada y aprobada por el autor. 
+                La traducción a otros idiomas fue facilitada por Google Gemini.
+            </p>
+        </div>
+    </footer>
+
+
+
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Éloge de la Sagesse - Salar Basiri</title>
+    <style>
+	@media print {
+    h2, h3 { page-break-after: avoid; }
+    .image-wrapper { page-break-inside: avoid; }
+    section { page-break-inside: auto; }
+    a { text-decoration: none; color: black; }
+	}
+        /* استایل‌های پایه و فونت */
+        :root {
+            --primary-color: #2c3e50;
+            --text-color: #333;
+            --bg-color: #f9f9f9;
+            --card-bg: #ffffff;
+            --accent-color: #e67e22;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* کانتینر اصلی */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* هدر مقاله */
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 30px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        .meta {
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        /* بخش‌های مقاله */
+        section {
+            background: var(--card-bg);
+            padding: 30px;
+            margin-bottom: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+        }
+
+        h2 {
+            color: var(--accent-color);
+            border-right: 5px solid var(--accent-color);
+            padding-right: 15px;
+            margin-top: 0;
+            font-size: 1.6rem;
+        }
+
+        p {
+            font-size: 1.1rem;
+            text-align: justify;
+        }
+
+        /* استایل تصاویر */
+        .image-wrapper {
+            margin: 25px 0;
+            text-align: center;
+        }
+
+        .image-wrapper img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .image-caption {
+            display: block;
+            font-size: 0.85rem;
+            color: #888;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        /* نقل قول‌ها (برای آیات یا جملات خاص) */
+        blockquote {
+            background: #fff3e0;
+            border-right: 10px solid #ffb74d;
+            margin: 20px 0;
+            padding: 20px;
+            font-style: italic;
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* فوتر */
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px;
+            color: #888;
+            border-top: 1px solid #eee;
+        }
+
+        /* واکنش‌گرایی برای موبایل */
+        @media (max-width: 600px) {
+            h1 { font-size: 1.8rem; }
+            section { padding: 20px; }
+            .container { padding: 20px 15px; }
+        }
+		
+		/* استایل اسلایدر */
+		.slider-container {
+			position: relative;
+			max-width: 100%;
+			margin: 20px auto;
+			overflow: hidden;
+			border-radius: 12px;
+			box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+		}
+
+		.slides {
+			display: none; /* در ابتدا همه مخفی هستند */
+		}
+
+		.slides img {
+			width: 100%;
+			height: auto;
+			display: block;
+		}
+
+		/* دکمه‌های ناوبری */
+		.prev, .next {
+			cursor: pointer;
+			position: absolute;
+			top: 50%;
+			width: auto;
+			padding: 16px;
+			margin-top: -22px;
+			color: white;
+			font-weight: bold;
+			font-size: 20px;
+			transition: 0.6s ease;
+			border-radius: 0 3px 3px 0;
+			user-select: none;
+			background-color: rgba(0,0,0,0.3);
+			text-decoration: none;
+		}
+
+		.next {
+			left: 0;
+			border-radius: 3px 0 0 3px;
+		}
+
+		.prev {
+			right: 0;
+			border-radius: 0 3px 3px 0;
+		}
+
+		.prev:hover, .next:hover {
+			background-color: rgba(0,0,0,0.8);
+		}
+
+		/* انیمیشن محو شدن */
+		.fade {
+			animation-name: fade;
+			animation-duration: 1.5s;
+		}
+
+		@keyframes fade {
+			from {opacity: .4} 
+			to {opacity: 1}
+		}
+		
+		
+		.download-btn-container {
+			text-align: center;
+			margin: 20px 0 40px 0;
+		}
+
+		.pdf-download-btn {
+			display: inline-flex;
+			align-items: center;
+			background-color: #2980b9; /* رنگ آبی خرد */
+			color: white;
+			padding: 12px 25px;
+			text-decoration: none;
+			border-radius: 50px;
+			font-weight: bold;
+			transition: all 0.3s ease;
+			box-shadow: 0 4px 10px rgba(41, 128, 185, 0.3);
+		}
+
+		.pdf-download-btn:hover {
+			background-color: #1a5276; /* آبی تیره تر برای حالت هاور */
+			transform: translateY(-2px);
+			box-shadow: 0 6px 15px rgba(41, 128, 185, 0.4);
+		}
+
+		.pdf-download-btn svg {
+			margin-left: 10px;
+			fill: white;
+		}
+		
+    </style>
+	
+	<meta name="description" content="Une exploration analytique du rationalisme, de la pensée libre et de la confrontation entre la rationalité moderne et les superstitions juridico-religieuses dans la quête de justice et de vérité.">
+    <meta name="keywords" content="Rationalisme, Éloge de la Sagesse, Libre Pensée, Liberté, Rationalité Moderne, Critique de la Jurisprudence, Épistémologie, Boussole de la Raison, Sagesse Individuelle">
+    <meta name="author" content="Salar Basiri">
+
+    <meta property="og:title" content="Éloge de la Sagesse : Retour à l'unique source authentique de la connaissance">
+    <meta property="og:description" content="Une analyse critique sur la souveraineté de la raison individuelle et la libération des chaînes de l'obscurantisme pour atteindre une justice réelle.">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="img/fig10.jpg">
+
+</head>
+<body>
+
+<div class="container">
+	<header>
+        <h1>Éloge de la Sagesse</h1>
+        <div class="meta">Salar Basiri</div>
+        <div class="meta">1er Janvier 2026, Téhéran, Iran</div>
+    </header>
+	
+    <div class="download-btn-container">
+    <a href="img/InPraiseForWisdomFR.pdf" class="pdf-download-btn" download>
+        <span>Télécharger le PDF</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+            <path d="M11.363 2c4.155 0 2.637 6 2.637 6s6-1.45 6 2.457v11.543h-16v-20h7.363zm.826-2h-10.189v24h20v-14.366l-9.811-9.634zm4.811 13h-10v-1h10v1zm0 2h-10v-1h10v1zm0 2h-10v-1h10v1z"/>
+        </svg>
+    </a>
+    </div>
+
+    <section id="intro">
+        <h2>Introduction</h2>
+            <p>À travers les millions d'années d'expansion de la vie sur Terre, l'émergence de l'« Homo sapiens » constitue l'apogée de ce récit — le point où la conscience et le pouvoir de la pensée transcendent les domaines de la matière et de l'énergie. En maîtrisant les lois de la nature, l'humanité est devenue capable d'imagination, de fabrication d'outils et d'innovation, manifestant ainsi une étincelle de puissance créatrice.</p>
+
+            <p>Tout cela serait inconcevable sans la « Sagesse ». Dans ce contexte, le rôle du « Langage » est indéniable ; la parole n'est pas seulement un moyen de communication, mais un outil de partage des expériences. Sans le langage, la conscience humaine individuelle ne se serait jamais transformée, au fil du temps, en une « super-conscience » collective ; aucune civilisation n'aurait pris forme et aucun changement significatif dans la trajectoire de la vie humaine n'aurait eu lieu.</p>
+
+            <p>Dans les récits de la création, il est dit que lorsque Dieu créa l'homme, Satan refusa de se prosterner, se percevant comme fait de feu et l'homme d'argile. Pourtant, en examinant cette créature, il découvrit un secret : la caractéristique la plus déterminante de l'homme est sa « Sagesse » et sa capacité de réflexion. C'est de cette prise de conscience que naquit le serment de Satan d'égarer l'humanité ; il comprit que ce n'est qu'en « éteignant la sagesse » qu'il pourrait détourner l'homme de son chemin authentique.</p>
+
+            <p>S'appuyant sur ce lien inséparable entre la pensée et le langage, l'objectif de cet écrit est d'employer les outils du discours et du dialogue pour redécouvrir et propager la « Sagesse Pure ». Ceci sert d'introduction à une série d'articles intitulée « Éloge de la Sagesse » — une collection dans laquelle je m'efforcerai, en m'appuyant sur le texte coranique et sur des méthodologies scientifiques raisonnées, de réexaminer la distinction fondamentale entre les humains et les autres créatures. Dans ce voyage, nous explorerons les anciens sophismes et les défis intellectuels contemporains qui obstruent le chemin de la sagesse ; car je crois que la clé pour dénouer les nœuds d'aujourd'hui réside dans le retour à la pensée libre, loin de tout dogmatisme.</p>
+
+        <div class="image-wrapper">
+            <img src="img/fig1.jpg" alt="Accent mis sur la pensée et le raisonnement">
+            <span class="image-caption">Accent mis sur la pensée et le raisonnement</span>
+        </div>
+    </section>
+	
+	<section id="section1">
+			<h2>Première partie : Les lois de la nature et la volonté humaine ; le seul socle commun</h2>
+
+				<p>L'un des sophismes les plus significatifs qui enchaînent la sagesse humaine est la délégation de toute responsabilité à des forces métaphysiques et le mépris qui en découle pour le rôle de « l'action » et de la « loi ». Pour sortir de cette impasse intellectuelle, nous devons parvenir à un consensus sur un principe universel qui sert de fondement à tout discours rationnel : le monde est régi par les « lois immuables de la nature » et par le « libre arbitre et l'action de l'homme ».</p>
+
+				<p>Il s'agit d'un principe objectif. L'acceptation du libre arbitre est la pierre angulaire de tout système juridique et moral dans le monde. Sans libre arbitre, ni le crime ni le châtiment n'ont de sens ; aucun meurtrier ne pourrait être condamné, et aucun héros ne pourrait être loué. Même face à la domination d'un tyran, ces deux principes ne sont pas violés ; nous assistons plutôt à l'abus du « libre arbitre » d'un être humain et à l'exploitation des outils du pouvoir (ancrés dans les lois naturelles), et non à un destin inévitable ou céleste.</p>
+
+				<p>La divergence des perspectives ne réside que dans l'interprétation de la source de ces deux principes :</p>
+
+				<p>1. Les véritables monothéistes croient que ces lois et ce pouvoir de libre arbitre ont été conçus et délégués à l'humanité par un Créateur unique.</p>
+
+				<p>2. Les non-croyants les considèrent comme le résultat de processus matériels et évolutifs.</p>
+
+				<p>3. Les adorateurs de la superstition, en revanche, en attribuant chaque événement à des volontés personnalisées existant en dehors de la légalité de la nature, insultent à la fois la sainteté de la sagesse et obstruent le chemin de la responsabilité humaine.</p>
+
+				<p>« Dieu ne se préoccupe pas de tels détails ! » Cette déclaration n'est pas un déni du Créateur ; c'est au contraire une exaltation de la Loi établie pour que le monde puisse tourner sur l'axe du libre arbitre délégué à l'humanité sage. Dans ce cadre, lorsque l'homme reconnaît les lois de la nature et les emploie pour une vie meilleure, c'est l'essence même de la « Justice ».</p>
+
+				<p>Dans un monde fondé sur la connaissance, l'acceptation de ces deux principes nous libère de l'attente de miracles ou de la peur de la superstition. Nous ne sommes pas les victimes sans choix du destin, mais plutôt des observateurs et des acteurs rationnels qui doivent forger leur propre destinée par la volonté libre, à travers la compréhension des lois de l'existence.</p>        
+        
+		<div class="image-wrapper">
+            <img src="img/fig2.jpg" alt="Accent sur les lois naturelles et la raison humaine">
+            <span class="image-caption">Accent sur les lois naturelles et la raison humaine</span>
+        </div>
+    </section>
+	
+	
+
+	<section id="section2">
+			<h2>Deuxième partie : Passer de la « Personne Sacrée » au « Principe Sacré »</h2>
+
+				<p>La mission la plus fondamentale du rationalisme sur la voie du monothéisme est le démantèlement des « cultes de la personnalité » et leur remplacement par la souveraineté du « Principe Sacré » ou de la « Vérité ». Le plus grand sophisme qui emprisonne les civilisations est le retour à l'ère de l'idolâtrie sous une nouvelle apparence — un état où l'« être humain » se substitue à la « Vérité ».</p>
+
+				<p><strong>De l'Anthropomorphisme à l'Angélisme</strong></p>
+
+				<p>Les esprits fuyant la raison sont incapables de saisir des concepts abstraits et tendent à incarner le droit et la justice dans le cadre d'une idole humaine (Anthropomorphisme). Les mouvements totalitaires exploitent cette faiblesse en créant une forme d'« angélisation » autour de certaines personnalités pour les élever à un statut d'« infaillibilité absolue ». L'objectif de ce sophisme est de rendre la personne incritiquable. Dès qu'un individu est supposé infaillible, toute critique à son égard est jugée comme un « blasphème », scellant ainsi les portes de la sagesse.</p>
+
+				<p><strong>La Sagesse : Le Messager Intérieur contre l'emprisonnement de l'intellect</strong></p>
+
+				<p>Dans la vision rationaliste, la « Raison » est désignée comme le Messager Intérieur ; tout comme les prophètes sont des messagers extérieurs, la sagesse est l'envoyé de Dieu au sein de chaque être humain. Par conséquent, l'accent authentique doit rester sur l'action et la volonté de l'individu rationnel et sage. Confiner l'intellect dans la volonté d'une seule personne — sous quelque titre que ce soit, qu'il s'agisse de Wali, de Calife ou de Tuteur — est, en vérité, un déni de ce Messager Intérieur et la suspension du Dépôt Divin confié à chaque individu.</p>
+
+				<p><strong>La confrontation entre Liberté et Despotisme : de l'ordre casernier à la captivité religieuse</strong></p>
+
+				<p>En disséquant des concepts tels que la Wilayah absolue, le Califat et la Tutelle humaine, nous arrivons à une vérité nue : en réalité, il ne s'agit rien de plus que d'un « ordre casernier » promu par des structures militaires et semi-militaires. Dans une caserne, l'« obéissance aveugle » est la plus haute vertu ; cependant, dans un système rationnel centré sur la Vérité, le « libre arbitre » et la « liberté » sont les fondements mêmes de la création humaine.</p>
+
+				<p><strong>Le modèle immuable de Pharaon : Propriété de la vie et des biens.</strong> Toute forme de gouvernement qui impose sa volonté personnelle au peuple est, en fait, une reproduction du modèle de « Pharaon ». Pharaon aussi présidait un gouvernement religieux ; il n'était pas seulement un dirigeant politique mais revendiquait un statut sacré, exhortant le peuple à l'adorer et affirmant sa propriété sur les vies, les biens et même le destin des Israélites. C'est précisément la revendication faite aujourd'hui sous le nom de « Wilayat al-Faqih » : une prétention à la propriété des destins nationaux sous le couvert d'une Députation Divine.</p>
+
+				<p><strong>L'imposture de l'autorité puisée dans le Sacré :</strong> L'histoire démontre que cela a été la méthode pérenne des régimes totalitaires : utiliser ce qui est communément accepté par les masses pour acquérir une « autorité » (authoritas). Dans ce processus, peu importe que la société soit superstitieuse, vulnérable ou même monothéiste ; le dirigeant despotique construit une échelle vers un statut divin en utilisant tout ce en quoi le peuple « croit ». Cet acte, indépendamment de la valeur intrinsèque de cette croyance, est un cas manifeste de « tromperie et d'abus ».</p>
+
+				<p><strong>Moïse (pax) : Le pionnier de la libération et de la liberté.</strong> Dans cette perspective, le prophète Moïse (pax) doit être considéré comme l'un des grands pionniers de la liberté. Sa mission n'était pas purement religieuse, mais un mouvement libérateur visant à briser les chaînes de la « Tutelle de Pharaon » sur l'humanité. Il s'est levé pour libérer l'homme de la servitude de l'homme et pour le conduire vers une « vérité sans médiation » et une sagesse libre.</p>
+
+				<p><strong>Le Chirk (Polythéisme) sous le manteau de la religion :</strong> Les partisans de ces systèmes de type caserne accusent souvent les critiques de « blasphème », alors qu'en réalité, ils représentent eux-mêmes la forme ultime de Chirk ; car ils ont assis un humain faillible à la position sacrée de Dieu et ont remplacé la vérité absolue par sa volonté personnelle. Ils saisissent les « balances de la sagesse » des mains de la nation pour être les seuls à servir de balance entre le bien et le mal.</p>        
+	</section>
+	
+	
+	
+	<section id="section3">
+            <h2>Troisième partie : Le monothéisme comme libération ; négation de tout intermédiaire sacré</h2>
+				<p>En décrivant la gloire de la Vérité, le Coran souligne que la sainteté n'appartient qu'à Lui seul (Al-Hashr : 23) et démantèle ainsi l'institution de la médiation :</p>
+
+				<div class="image-wrapper">
+					<img src="img/fig4.jpg" alt="Accent sur les attributs de Dieu dans la perspective monothéiste des religions abrahamiques">
+					<span class="image-caption">Accent sur les attributs de Dieu dans la perspective monothéiste des religions abrahamiques</span>
+				</div>
+
+				<p><strong>Négation de toute tutelle en dehors de Dieu : « ...Et vous n'avez, en dehors d'Allah, ni protecteur ni secoureur. » (Al-Baqarah : 107)</strong></p>
+
+				<div class="image-wrapper">
+					<img src="img/fig3.jpg" alt="Accent sur l'absence de protecteur ou de secoureur en dehors de Dieu">
+					<span class="image-caption">Accent sur l'absence de protecteur ou de secoureur en dehors de Dieu</span>
+				</div>
+
+				<p><strong>Négation de l'intercession et de la médiation : « ...Ils n'ont, en dehors de Lui, ni protecteur ni intercesseur... » (Al-An'am : 51)</strong></p>
+
+				<div class="image-wrapper">
+					<img src="img/fig5.jpg" alt="Négation de l'intercession et de la médiation">
+					<span class="image-caption">Négation de l'intercession et de la médiation</span>
+				</div>		
+
+				<p><strong>Par conséquent, le monothéisme implique qu'aucun humain, à quelque titre que ce soit, n'est un intermédiaire obligatoire entre la sagesse et la vérité. Les systèmes fondés sur la « tutelle » humaine (Wilayah), en transformant une « personne » en une entité sacrée, ont régressé vers les pratiques du chamanisme et du pharaonisme. Le retour à la sagesse est subordonné à la transcendance de cette idolâtrie et à la reconquête du « libre arbitre ».</strong></p>        
+    </section>
+	
+	<section id="section4">
+			<h2>Quatrième partie : Le refus de la raison dans le sophisme de la négation du « Temps et du Lieu »</h2>
+
+				<p>Le premier coup, et le plus fatal, que la pensée jurisprudentielle (Fiqhi) porte au corps de la sagesse pure est le mépris intentionnel des éléments du « temps et du lieu ». Avec une persistance singulière, les juristes tentent d'imposer les modèles biologiques et les modes de subsistance de la péninsule arabique d'il y a 1400 ans comme un schéma éternel pour gouverner la société complexe de l'Iran du XXIe siècle. Cette approche n'est pas une simple erreur mais un sophisme fondamental ; car même en supposant que les figures historiques de l'ère du Prophète étaient des personnalités relativement positives, transformer des comportements et des discours adaptés à l'« Ignorance Hijazie » en base juridique pour une nation à l'ère de la technologie demeure un déni explicite de la rationalité humaine. En fait, les vertus individuelles d'une figure au cœur de l'histoire ne servent jamais de licence pour transformer ses préférences temporelles et ses édits en « lois immuables » pour les âges suivants.</p>
+
+				<p>Il faut reconnaître la vérité historique selon laquelle l'émergence de toute école de pensée dans le contexte de l'histoire a été un « processus » — une progression adaptée aux capacités de cette époque spécifique. L'idée qu'avec l'arrivée d'une foi, les sociétés ont été soudainement rompues de tout lien temporel pour atteindre une perfection absolue est une illusion vaine. Dès lors, pourquoi le mode de vie des prédécesseurs — qui, par ailleurs, ne présentait aucun signe d'une société utopique — devrait-il servir de base au gouvernement d'une société moderne ?</p>
+
+				<p>La discussion sur les « exigences du temps et du lieu » ne se limite pas à une période spécifique ; que ce soit il y a 3500 ans à l'époque cananéenne, il y a 2500 ans dans l'Antiquité, ou il y a 1400 ans, l'humanité a toujours été empêtrée dans les limites cognitives et instrumentales de son temps, et ces méthodes ne peuvent être étendues au monde contemporain.</p>
+
+				<div class="image-wrapper">
+					<img src="img/fig6.jpg" alt="Accent coranique sur l'adéquation des conditions de temps et de lieu et l'abrogation des versets">
+					<span class="image-caption">Accent coranique sur l'adéquation des conditions de temps et de lieu et l'abrogation des versets</span>
+				</div>
+
+				<p>En vérité, avant les XVIIe et XVIIIe siècles, en raison de la simplicité des structures sociales et des populations limitées, le modèle de « sacralisation d'un individu » a pu fonctionner comme une solution pour maintenir un ordre tribal fragile. Cependant, avec le développement des sociétés — et particulièrement l'expansion sans précédent de la population — il n'est plus possible pour une seule « personne » de gérer une société entière avec toutes ses complexités. En fait, la stagnation des civilisations à travers l'histoire trouve précisément son origine ici : l'emprisonnement du potentiel infini de la sagesse collective dans la cage étroite de la volonté et du discernement d'un seul individu.</p>
+    </section>
+
+	<section id="section5">
+			<h2>Cinquième partie : La jurisprudence de l'illusion ; la souveraineté des « mythes » sur les destins nationaux</h2>
+
+				<p>En disséquant avec plus de précision le paysage juridique actuel de l'Iran, nous parvenons à une vérité terrifiante : ce système juridique n'est pas bâti sur les fondements de la sagesse, mais sur une « construction illusoire ». Il semble que les gardiens de cette mentalité, ne voyant aucune voie pour revendiquer pour eux-mêmes une prophétie réelle, ont fabriqué un « personnage mythique » derrière le voile de l'Occultation. Ce faisant, ils se sont assuré une rente sacrée afin que, en son absence, ils puissent présenter leur « volonté personnelle » comme la loi, sous le nom de « Députation » (Niabat).</p>
+
+				<p>C'est précisément l'impasse intellectuelle contre laquelle le Coran met sans cesse en garde. Comme il l'énonce :</p>
+
+				<div class="image-wrapper">
+					<img src="img/fig7.jpg" alt="Référence coranique à ceux qui suivent des illusions">
+					<span class="image-caption">Référence coranique au culte des illusions et des mythes.</span>
+				</div> 
+
+				<p>Les dirigeants de cette idéologie, en remplaçant la « vérité objective » par des « illusions verbales », ont placé la société dans un état où le délire d'une seule personne l'emporte sur la sagesse d'une nation entière. Ici, les traces de l'avertissement coranique concernant l'influence satanique — drapée dans les habits de la sainteté et des « paroles ornées » — deviennent manifestes :</p>
+
+				<div class="image-wrapper">
+					<img src="img/fig8.jpg" alt="Référence coranique aux paroles ornées">
+					<span class="image-caption">Référence au culte des illusions et des mythes tel que mentionné dans le Coran.</span>
+				</div> 
+
+				<p>Ce « Zukhruf al-Qawl » (paroles dorées) ou discours orné, consiste en ces justifications jurisprudentielles mêmes qui tentent d'imposer de force au peuple une question illusoire et ahistorique comme le « principe le plus sacré de la constitution ». Lorsque les droits d'un pays sont extraits du domaine de la « raison collective » pour être transférés dans celui des « délires individuels », le résultat n'est rien d'autre que la « régurgitation du despotisme médiéval » au cœur de l'ère moderne. En fait, il ne s'agit pas d'un système divin, mais d'une forme de « chamanisme juridique », où un groupe revendique un lien avec un être mythique pour dominer la vie, les biens et la liberté des êtres humains à travers cette illusion même.</p>
+    </section>
+
+	<section id="section6">
+ 			<h2>Sixième partie : De la justice moderne à l'oppression pseudo-sacrée</h2>
+
+				<p>À la lumière de cette analyse, la racine de l'hostilité séculaire des juristes envers la « raison calculatrice moderne » devient évidente. La raison moderne, dotée d'outils de critique et d'examen des preuves, conteste toute affirmation dépourvue de fondement empirique. Par conséquent, les seuls acheteurs de la pensée jurisprudentielle actuelle sont ceux qui souffrent de facultés cognitives affaiblies ou qui ont perdu le pouvoir de distinguer la « réalité » de l'« illusion » sous l'effet d'un endoctrinement aux allures de sédatif. En fait, ce système juridique ne prospère que dans une atmosphère où la sagesse est suspendue et où la « sédation mentale » a remplacé « l'analyse objective ».</p>
+
+				<p>Ici, il faut souligner le grand sophisme concernant le concept de « Justice ». La justice n'est pas un ensemble d'instructions descendues d'un ciel d'illusions, mais un concept humain moderne inventé par l'humanité pour maintenir la stabilité sociale et garantir une coexistence pacifique. Un regard sur le monde contemporain prouve cette vérité :</p>
+
+				<p>Dans les pays qui ont accepté la justice comme un contrat social fondé sur les droits de l'homme, nous observons qu'une justice relative a été réalisée à la lumière de la liberté ; car là-bas, la loi est le produit de la sagesse collective plutôt que de la volonté d'un être mythique et de son délégué. Inversement, dans des pays comme l'Iran qui prétendent avoir atteint une « Justice Sacrée », ce que l'on observe en pratique n'est rien d'autre qu'une oppression profonde, de la discrimination et une injustice structurelle.</p>
+
+				<div class="image-wrapper">
+					<img src="img/fig9.jpg" alt="Accent mis sur les moyens terrestres de mesure pour l'établissement de la justice">
+					<span class="image-caption">Accent mis sur les moyens et mesures terrestres pour l'établissement de la justice.</span>
+				</div> 		
+
+				<p>La revendication d'une justice sacrée n'est qu'une couverture pour échapper à la responsabilité ; car lorsque la justice est transformée en quelque chose de « métaphysique » et de « représentatif », elle ne peut plus être mesurée à l'aune de la raison humaine, et la voie est libre pour que n'importe quel crime soit commis sous un nom sacré. La vérité est amère : entre « l'illusion de justice divine des juristes » et la « justice humaine réelle », il existe un abîme aussi profond que l'intégralité du Moyen Âge.</p>
+
+				<p>Un autre point concernant la réalité objective et simultanément choquante de cette sédation mentale est la double approche de l'« ivresse » en Iran. L'opposition féroce à l'alcool (qui est souvent un symbole de joie sociale et de vigilance critique) aux côtés de la tolérance — voire de l'accompagnement et de l'encouragement — des stupéfiants qui mènent l'esprit vers la passivité, la léthargie et le fantasme, n'est pas un hasard.</p>
+
+				<p>Cette approche est une reproduction du schéma antique « chamanique », où l'usage de substances psychoactives et de narcotiques servait d'outil pour créer l'illusion de « l'intuition » et la revendication d'une « communication avec l'absent mythique ». Quand l'esprit, par la sédation (qu'elle soit physique ou idéologique), se distancie de la réalité objective, l'acceptation d'« êtres illusoires » et de « lois trans-temporelles » devient plus aisée. En vérité, l'expansion des salons de narguilé et de leurs additifs inconnus sert de métaphore à ce Fiqh même qui, en désactivant les facultés critiques de l'intellect, plonge la société dans un profond sommeil médiéval afin que personne ne puisse demander : « Comment la volonté d'une personne absente a-t-elle remplacé la sagesse vivante de millions d'êtres humains ? »</p>
+		
+    </section>
+
+	<section id="section7">
+ 			<h2>Septième partie : Une note sur la tromperie sous le couvert de la vérité</h2>
+
+				<p>Avant de présenter l'analyse finale et la conclusion concernant le comportement des gardiens de ce système intellectuel, il convient de noter que nous sommes ici face au phénomène du « menteur professionnel ». Le pouvoir destructeur de ce mouvement réside dans le fait qu'ils croient d'abord à leur propre mensonge (en tant que vérité sacrée) afin de pouvoir construire un « scénario » cohérent et trompeur sur cette base. L'une des méthodes de ruse les plus sophistiquées consiste à énoncer une partie de la « réalité » dans le but explicite de la détruire ; ils y parviennent en déplaçant le poids sémantique de la vérité. Par exemple, face à des critiques documentées et rationnelles basées sur le texte authentique du Coran, la machine de propagande — au lieu d'aborder le contenu — a recours à « l'assassinat de la personnalité » et au « marquage sécuritaire ». Ils ciblent l'intention de l'auteur pour détourner l'esprit de l'auditoire de la « réalité centrale », cachant la vérité sous un linceul de concepts négatifs et anxiogènes. C'est l'essence même de la « tromperie jurisprudentielle », dans laquelle l'écoute de la parole de vérité est présentée à tort comme une conspiration malveillante.</p>        
+    </section>
+
+	<section id="conclusion" style="border: 2px solid var(--accent-color);">
+			<h2>Huitième partie, Conclusion : Retour à l'unique source authentique de la connaissance</h2>
+
+				<p><strong>Contrairement à toutes les fabrications jurisprudentielles qui cherchent à considérer les humains comme des mineurs, il doit être déclaré avec une certitude absolue : l'unique source authentique et inébranlable de la connaissance est la « Raison » et l'« Intellect » seuls. Tout ce qui se situe en dehors du cercle de la sagesse manque d'authenticité et de validité. Même des concepts tels que la « Prophétie » ou la « Shahada » (profession de foi) n'acquièrent une valeur humaine et divine que lorsqu'ils sont formés sur un fondement de choix conscient et d'évaluation rationnelle. L'acceptation de tout principe ou branche de la religion est fondamentalement dénuée de sens pour une personne « irrationnelle » ; car la religion est destinée à l'« humain », et la ligne de démarcation entre l'humain et l'animal n'est rien d'autre que le pouvoir de discernement et de sagesse.</strong></p>
+
+				<p><strong>Pour clarifier cette vérité, on peut employer une analogie simple : la Raison est comme une boussole précise pour naviguer sur le chemin de la vie. Si vous aviez l'intention de voyager de Téhéran à Racht, le fait de vous déplacer sur la base de directions illusoires ou aléatoires — ou de suivre aveuglément les affirmations de navigation d'un autre qui ne connaît pas lui-même le chemin — pourrait-il jamais vous mener à destination ? Certainement pas. Cette même logique s'applique à la connaissance et à la direction de la société. Par conséquent, l'intellect et la sagesse sont les seules références du savoir ; un fait qui est, par ailleurs, souligné avec intensité dans le texte authentique du Coran, qui appelle à maintes reprises l'humanité à la réflexion et à la contemplation.</strong></p>
+
+				<p><strong>La source ultime du jugement et de la connaissance est « sa propre raison », et non la volonté, le discernement ou la fatwa de toute autre personne (sous quelque titre que ce soit, qu'il s'agisse de Wali, de Calife, de Tuteur ou de Délégué). Abandonner les rênes de l'intellect à un tiers est un déni d'humanité et une régression vers un niveau instinctif et animal. Le véritable monothéisme réside dans la libération des chaînes de la « tutelle humaine sur l'homme » et dans le fait de se tenir au sommet d'une sagesse libre. Tout décret incompatible avec les balances de la saine raison humaine ne provient pas de la Vérité, mais surgit de ces « illusions » et de ces « tromperies » mêmes qui ont maintenu les civilisations dans l'obscurité pendant des siècles.</strong></p>
+
+				<div class="image-wrapper">
+					<img src="img/fig10.jpg" alt="La raison est l'unique source authentique de connaissance, la boussole du mouvement de l'humain libre.">
+					<span class="image-caption">La raison est l'unique source authentique de connaissance, servant de boussole au mouvement de l'humain libre.</span>
+				</div>        
+    </section>
+
+
+
+	<footer>
+        <div class="content-fr">
+            <p>© 2026 Salar Basiri. Tous droits réservés. Publié sous licence CC BY-NC-ND 4.0.</p>
+            <p style="font-size: 0.85em; opacity: 0.8;">
+                Note : L'article original est en persan et la version anglaise a été révisée et approuvée par l'auteur. 
+                La traduction dans les autres langues a été facilitée par Google Gemini.
+            </p>
+        </div>
+    </footer>
+
+</div>
+
+
+</body>
+</html>
